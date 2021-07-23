@@ -2,7 +2,9 @@ package com.example.weather.di
 
 import android.app.Application
 import android.content.Context
+import com.example.weather.common.di.qualifier.ApplicationContext
 import com.example.weather.common.di.CommonModule
+import com.example.weather.di.module.AppModule
 import com.example.weather.di.module.SubcomponentsModule
 import com.example.weather.weatherforecast.di.WeatherForecastComponent
 import dagger.Component

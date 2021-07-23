@@ -1,4 +1,4 @@
-package com.example.weather.common.di
+package com.example.weather.common.di.scope
 
 import javax.inject.Scope
 

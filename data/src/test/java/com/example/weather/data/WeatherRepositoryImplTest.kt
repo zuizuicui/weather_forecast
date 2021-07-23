@@ -21,7 +21,11 @@ class WeatherRepositoryImplTest {
     }
 
     class FakeWeatherApi(private val weatherInfo: List<WeatherInfo>) : WeatherApi {
-        override suspend fun searchWeatherInfo(keySearch: String) = weatherInfo
+        override suspend fun searchWeatherInfo(
+            searchKey: String,
+            cnt: String,
+            appid: String
+        ) = weatherInfo
 
     }
 }

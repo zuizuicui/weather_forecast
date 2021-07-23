@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'kotlin-kapt'
 }
 
 java {
@@ -9,6 +10,7 @@ java {
 }
 
 dependencies {
+    api implementationLibs
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
     testApi 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
