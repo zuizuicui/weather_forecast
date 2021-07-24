@@ -2,7 +2,7 @@ package com.example.weather.weatherforecast.ui.searchweather
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weather.domain.interaction.SearchWeatherInfoUseCase
-import com.example.weather.domain.model.WeatherInfo
+import com.example.weather.domain.model.WeatherElement
 import com.example.weather.weatherforecast.util.MainCoroutineRule
 import com.example.weather.weatherforecast.util.getOrAwaitValue
 import io.mockk.coEvery
@@ -40,8 +40,8 @@ class SearchWeatherViewModelTest {
     @Test
     fun searchWeather_returnempty() {
         coEvery { searchWeatherUseCase(any()) } coAnswers {listOf(
-            WeatherInfo(1),
-            WeatherInfo(2))
+            WeatherElement(1),
+            WeatherElement(2))
         }
 
         val keySearch = "ave"
@@ -49,6 +49,6 @@ class SearchWeatherViewModelTest {
 
 
         coVerify { searchWeatherUseCase(keySearch) }
-        Assert.assertEquals (2, viewModel.weatherInfo.getOrAwaitValue().size)
+        Assert.assertEquals (2, viewModel.weatherElement.getOrAwaitValue().size)
     }
 }

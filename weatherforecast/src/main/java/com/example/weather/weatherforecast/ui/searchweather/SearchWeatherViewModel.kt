@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.domain.interaction.SearchWeatherInfoUseCase
-import com.example.weather.domain.model.WeatherInfo
-import kotlinx.coroutines.coroutineScope
+import com.example.weather.domain.model.WeatherElement
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,9 +13,9 @@ class SearchWeatherViewModel @Inject constructor (
     val searchWeatherInfoUseCase: SearchWeatherInfoUseCase
 ) : ViewModel() {
 
-    private var _weatherInfo = MutableLiveData<List<WeatherInfo>>(listOf())
+    private var _weatherInfo = MutableLiveData<List<WeatherElement>>(listOf())
 
-    var weatherInfo : LiveData<List<WeatherInfo>> = _weatherInfo
+    var weatherElement : LiveData<List<WeatherElement>> = _weatherInfo
 
     fun searchWeather(keySearch: String) {
          viewModelScope.launch {

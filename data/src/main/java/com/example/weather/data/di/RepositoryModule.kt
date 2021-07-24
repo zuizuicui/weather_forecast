@@ -1,4 +1,4 @@
-package com.example.weather.di.module
+package com.example.weather.data.di
 
 import com.example.weather.data.WeatherRepositoryImpl
 import com.example.weather.domain.repository.WeatherRepository

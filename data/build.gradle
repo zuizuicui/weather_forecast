@@ -44,10 +44,15 @@ dependencies {
 
     api 'com.squareup.retrofit2:retrofit:2.9.0'
     api implementationLibs
+    kapt kaptLibs
+
+    api 'org.mapstruct:mapstruct:1.5.0.Beta1'
+    kapt "org.mapstruct:mapstruct-processor:1.5.0.Beta1"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
+    testImplementation 'io.mockk:mockk:1.11.0'
 }

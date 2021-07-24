@@ -2,14 +2,12 @@ package com.example.weather.di.module
 
 import com.example.weather.data.remote.WeatherApi
 import com.google.gson.Gson
-//import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-//import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 
@@ -39,11 +37,9 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideGsonConverterFactory(gson: Gson?): GsonConverterFactory? {
-        return GsonConverterFactory.create(gson)
+    fun provideGsonConverterFactory(): GsonConverterFactory {
+        return GsonConverterFactory.create(Gson())
     }
-//    @Provides
-//    internal fun provideMoshi(): Moshi = Moshi.Builder().build()
 
     @Provides
     internal fun provideWeatherApi(retrofit: Retrofit) = retrofit.create(WeatherApi::class.java)

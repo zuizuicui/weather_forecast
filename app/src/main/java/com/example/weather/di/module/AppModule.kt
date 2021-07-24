@@ -6,7 +6,7 @@ import com.example.weather.common.di.qualifier.ApplicationContext
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [NetworkModule::class, RepositoryModule::class, DispatcherModule::class])
+@Module(includes = [NetworkModule::class, DispatcherModule::class])
 class AppModule(private val application: Application) {
 
     @Provides

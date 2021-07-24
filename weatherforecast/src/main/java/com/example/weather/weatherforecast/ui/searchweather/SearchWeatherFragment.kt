@@ -36,7 +36,7 @@ class SearchWeatherFragment : BaseFragment(R.layout.search_weather_fragment) {
     }
 
     private fun subscribeUi(adapter: SearchWeatherAdapter, binding: SearchWeatherFragmentBinding) {
-        viewModel.weatherInfo.observe(viewLifecycleOwner) { result ->
+        viewModel.weatherElement.observe(viewLifecycleOwner) { result ->
             binding.hasWeatherInfo = !result.isNullOrEmpty()
             adapter.submitList(result)
         }
