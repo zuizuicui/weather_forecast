@@ -15,4 +15,5 @@ dependencies {
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
     testApi 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
     testApi 'junit:junit:4.13.2'
+    testApi 'io.mockk:mockk:1.11.0'
 }

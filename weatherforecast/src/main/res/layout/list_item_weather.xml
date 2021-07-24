@@ -8,18 +8,50 @@
     <data>
         <variable
             name="weather"
-            type="com.example.weather.domain.model.WeatherElement"/>
+            type="com.example.weather.weatherforecast.ui.searchweather.WeatherModel"/>
     </data>
 
     <LinearLayout
         android:id="@+id/weather_forecast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="4dp">
 
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@{@string/all_date_prefix(weather.date)}"
+            tools:text="Date: Tue, 10 Mar 2020" />
+
+        <TextView
+            android:id="@+id/tv_ave_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/item_weather_ave_temp(weather.aveTemp)}"
+            tools:text="Average temperature: 20°C" />
+
+        <TextView
+            android:id="@+id/tv_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/all_pressure_prefix(weather.pressure)}"
+            tools:text="Pressure: 1013" />
+
+        <TextView
+            android:id="@+id/tv_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/item_weather_humidity(weather.humidity)}"
+            tools:text="Humidity: 71%" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/all_description_prefix(weather.description)}"
+            tools:text="Description: light rain" />
 
     </LinearLayout>
 </layout>

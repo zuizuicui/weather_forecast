@@ -4,7 +4,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApi {
-    @GET("2.5/forecast/daily")
+    @GET("/data/2.5/forecast/daily")
     suspend fun searchWeatherInfo(
         @Query("q") searchKey: String = "hanoi",
         @Query("cnt") cnt: String = "7",

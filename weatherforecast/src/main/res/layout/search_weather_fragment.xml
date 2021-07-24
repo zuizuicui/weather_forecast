@@ -6,27 +6,44 @@
     tools:context=".ui.searchweather.SearchWeatherFragment">
 
     <data>
-
         <variable
             name="hasWeatherInfo"
             type="boolean" />
+        <variable
+            name="searchText"
+            type="String" />
+        <variable
+            name="minSearchKeyLength"
+            type="int" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weather_forecast"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@={searchText}"/>
+
+        <Button
+            android:id="@+id/btn_get_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_get_weather"
+            android:enabled="@{searchText.length() >= minSearchKeyLength}"
+            android:textAllCaps="false" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/weatherList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="WeatherForecastFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/list_item_weather" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

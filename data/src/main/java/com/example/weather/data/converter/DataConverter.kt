@@ -52,10 +52,10 @@ interface FeelsLikeConvert {
 
 @Mapper
 interface TempConvert {
-    fun convertToDto(temp: Temp) : TempDto
+    fun convertToDto(temp: Temperature) : TemperatureDto
 
     @InheritInverseConfiguration
-    fun convertToModel(tempDto: TempDto) : Temp
+    fun convertToModel(tempDto: TemperatureDto) : Temperature
 }
 
 @Mapper

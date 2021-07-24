@@ -18,7 +18,7 @@ data class WeatherElement (
     val date: Long,
     val sunrise: Long,
     val sunset: Long,
-    val temp: Temp,
+    val temperature: Temperature,
     val feelsLike: FeelsLike,
     val pressure: Long,
     val humidity: Long,
@@ -38,7 +38,7 @@ data class FeelsLike(
     val morn: Double
 )
 
-data class Temp(
+data class Temperature(
     val day: Double,
     val min: Double,
     val max: Double,

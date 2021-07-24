@@ -40,7 +40,8 @@ data class WeatherElementDto(
     val date: Long,
     val sunrise: Long,
     val sunset: Long,
-    val temp: TempDto,
+    @SerializedName("temp")
+    val temperature: TemperatureDto,
     @SerializedName("feels_like")
     val feelsLike: FeelsLikeDto,
     val pressure: Long,
@@ -61,7 +62,7 @@ data class FeelsLikeDto(
     val morn: Double
 )
 
-data class TempDto(
+data class TemperatureDto(
     val day: Double,
     val min: Double,
     val max: Double,

@@ -2,12 +2,13 @@ package com.example.weather
 
 import android.app.Application
 import com.example.weather.di.DaggerAppComponent
+import com.example.weather.di.module.AppModule
 import com.example.weather.weatherforecast.di.WeatherForecastComponent
 import com.example.weather.weatherforecast.di.WeatherForecastComponentProvider
 
 class WeatherApplication : Application(), WeatherForecastComponentProvider {
 
-    private val appComponent = DaggerAppComponent.builder().build()
+    private val appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
     private var weatherForecastComponent : WeatherForecastComponent? = null
 
     override fun onCreate() {

@@ -25,14 +25,16 @@ class NetworkModule {
     @Provides
     internal fun provideOkHttpClient(certPinner: CertificatePinner): OkHttpClient {
         return OkHttpClient.Builder()
-//            .certificatePinner(certPinner)
+            .certificatePinner(certPinner)
             .build()
     }
 
     @Provides
     internal fun provideCertificatePinner() =
         CertificatePinner.Builder()
-            .add("klara.tech", "")
+            .add("api.openweathermap.org", "sha256/axmGTWYycVN5oCjh3GJrxWVndLSZjypDO6evrHMwbXg=")
+            .add("api.openweathermap.org", "sha256/4a6cPehI7OG6cuDZka5NDZ7FR8a60d3auda+sKfg4Ng=")
+            .add("api.openweathermap.org", "sha256/x4QzPSC810K5/cMjb05Qm4k3Bw5zBn4lTdO/nEW/Td4=")
             .build()
 
     @Provides

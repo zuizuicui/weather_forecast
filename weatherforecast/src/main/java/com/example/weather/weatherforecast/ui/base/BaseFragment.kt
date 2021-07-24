@@ -6,7 +6,7 @@ import com.example.weather.common.ui.CommonFragment
 import com.example.weather.weatherforecast.di.WeatherForecastComponent
 import com.example.weather.weatherforecast.di.WeatherForecastComponentProvider
 
-abstract class BaseFragment(@LayoutRes contentLayoutId: Int) : CommonFragment(contentLayoutId) {
+abstract class BaseFragment : CommonFragment() {
     override fun attachComponent(savedInstanceState: Bundle?) {
         context?.applicationContext?.let {
             val componentProvider = it as  WeatherForecastComponentProvider

@@ -33,7 +33,7 @@ class WeatherApiTest {
         mockWebServer.enqueueResponse("weather-info-200.json", 200)
 
         runBlocking {
-            val actual = sut.searchWeatherInfo("abc")
+            val actual = sut.searchWeather("abc")
 
             Assert.assertNotNull(actual)
         }
@@ -43,7 +43,7 @@ class WeatherApiTest {
     fun `should search weather given 404 not found response`() {
         mockWebServer.enqueueResponse("weather-info-404.json", 200)
         runBlocking {
-            sut.searchWeatherInfo("abc")
+            sut.searchWeather("abc")
         }
     }
 }
