@@ -38,14 +38,7 @@ class SearchWeatherInfoUseCaseTest {
 
     @Test
     fun testSearchWeather_shouldReturnResult() {
-        val expectResult = listOf(WeatherResultElement(
-            date = 10000,
-            pressure = 12,
-            humidity = 10,
-            description = "description",
-            averageTemp = 1.0
-        ))
-
+        val expectResult = createExpectResult()
         prepareForTest(expectResult)
 
         testDispatcher.runBlockingTest {
@@ -53,6 +46,14 @@ class SearchWeatherInfoUseCaseTest {
         }
         testDispatcher.cleanupTestCoroutines()
     }
+
+    private fun createExpectResult() = listOf(WeatherResultElement(
+        date = 10000,
+        pressure = 12,
+        humidity = 10,
+        description = "description",
+        averageTemp = 1.0
+    ))
 
     private fun prepareForTest(expectResult: List<WeatherResultElement>) {
         expectResult[0].let {

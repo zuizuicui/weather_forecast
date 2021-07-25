@@ -29,7 +29,7 @@ class SearchWeatherViewModel @Inject constructor (
         getMinSearchKeyLength()
     }
 
-    private fun getMinSearchKeyLength() {
+    private fun getMinSearchKeyLength() = viewModelScope.launch {
         _minSearchKeyLength.value = getKeySearchLengthUseCase()
     }
 
