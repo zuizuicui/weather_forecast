@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
-import com.example.weather.weatherforecast.R
 import com.example.weather.weatherforecast.databinding.SearchWeatherFragmentBinding
 import com.example.weather.weatherforecast.di.WeatherForecastComponent
 import com.example.weather.weatherforecast.ui.base.BaseFragment
@@ -45,20 +44,31 @@ class SearchWeatherFragment : BaseFragment() {
         binding.weatherList.adapter = adapter
         binding.searchText = ""
 
-        binding.btnGetWeather.setOnClickListener {_ ->
-            binding.searchText?.let {
-                viewModel.searchWeather(it)
-            }
+        binding.btnGetWeather.setOnClickListener {v ->
+            doSearch(v, binding.searchText)
         }
 
         subscribeUi(adapter, binding)
         return binding.root
     }
 
+    private fun doSearch(v: View, searchKey: String?) {
+        searchKey?.let {
+            viewModel.searchWeather(it)
+            dismissKeyboard(v.windowToken)
+            viewModel.searchWeather(searchKey)
+        }
+        // Dismiss keyboard
+        dismissKeyboard(v.windowToken)
+    }
+
     private fun subscribeUi(adapter: SearchWeatherAdapter, binding: SearchWeatherFragmentBinding) {
         viewModel.weatherElement.observe(viewLifecycleOwner) { result ->
-            binding.hasWeatherInfo = !result.isNullOrEmpty()
             adapter.submitList(result)
+        }
+
+        viewModel.viewState.observe(viewLifecycleOwner) {
+            binding.hasWeatherInfo = it
         }
 
         viewModel.minSearchKeyLength.observe(viewLifecycleOwner) { minSearchKeyLength ->

@@ -5,4 +5,6 @@
     <string name="all_description_prefix">Description: %s</string>
     <string name="item_weather_ave_temp">Average temperature: %s°C</string>
     <string name="item_weather_humidity">Average temperature: %s%%</string>
+    <string name="search_weather_message_empty_page">Please enter your key search and \n search for weathers.</string>
+    <string name="search_weather_message_no_result">Your key search have no result,\n please change a new one and try again.</string>
 </resources>

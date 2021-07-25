@@ -1,5 +1,6 @@
 package com.example.weather.data
 
+ import android.content.res.Resources
  import com.example.weather.data.converter.DataConverter
  import com.example.weather.data.remote.WeatherApi
  import com.example.weather.data.converter.WeatherElementConvert
@@ -20,14 +21,16 @@ class WeatherRepositoryImpl @Inject constructor(
 ) : WeatherRepository {
     override suspend fun searchWeather(keySearch: String) = withContext(ioDispatcher) {
         val weatherResponse = try {
-            weatherApi.searchWeatherInfo(keySearch)
+            weatherApi.searchWeatherInfo(keySearch).apply {
+                if(!this.isSuccess()) throw Resources.NotFoundException()
+            }
+        } catch (e: NetworkErrorException) {
+            throw e
+        } catch (e: Resources.NotFoundException) {
+            throw e
         } catch (e: Exception) {
-            throw NetworkErrorException()
-        }
-        if (weatherResponse.isSuccess()) {
-            return@withContext weatherConverter.convertToListModel(weatherResponse.list)
-        } else {
             throw CityNotFoundException()
         }
+        return@withContext weatherConverter.convertToListModel(weatherResponse.list)
     }
 }

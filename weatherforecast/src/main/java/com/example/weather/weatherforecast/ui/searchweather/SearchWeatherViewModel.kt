@@ -4,18 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weather.common.ui.CommonViewModel
+import com.example.weather.common.ui.CommonViewState
+import com.example.weather.common.ui.ViewState
 import com.example.weather.domain.interaction.GetKeySearchLengthUseCase
 import com.example.weather.domain.interaction.SearchWeatherInfoUseCase
+import com.example.weather.domain.model.FailRequestException
 import com.example.weather.domain.model.WeatherElement
 import com.example.weather.weatherforecast.ui.util.dateFormat
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class SearchWeatherViewModel @Inject constructor (
     val getKeySearchLengthUseCase: GetKeySearchLengthUseCase,
     val searchWeatherInfoUseCase: SearchWeatherInfoUseCase
-) : ViewModel() {
+) : CommonViewModel() {
 
     private var _minSearchKeyLength = MutableLiveData(0)
     var minSearchKeyLength : LiveData<Int> = _minSearchKeyLength
@@ -32,6 +37,7 @@ class SearchWeatherViewModel @Inject constructor (
     }
 
     fun searchWeather(keySearch: String) = viewModelScope.launch {
+        _viewState.value = CommonViewState.LOADING
         try {
             val result = searchWeatherInfoUseCase(keySearch)
             _weatherInfo.value = result.map {
@@ -43,8 +49,12 @@ class SearchWeatherViewModel @Inject constructor (
                     description = it.description
                 )
             }
+            _viewState.value = CommonViewState.HAS_RESULT
+        } catch (e: FailRequestException) {
+            _viewState.value = CommonViewState.NO_RESULT
         } catch (e: Exception) {
             e.printStackTrace()
+            _viewState.value = CommonViewState.ERROR
         }
     }
 

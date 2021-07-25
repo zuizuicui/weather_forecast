@@ -1,15 +1,20 @@
 package com.example.weather.di.module
 
+import android.content.Context
+import com.example.weather.common.di.qualifier.ApplicationContext
+import com.example.weather.data.config.CacheControlInterceptor
+import com.example.weather.data.config.RetrofitConfig
 import com.example.weather.data.remote.WeatherApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
 
 @Module
 class NetworkModule {
@@ -23,11 +28,31 @@ class NetworkModule {
             .build()
 
     @Provides
-    internal fun provideOkHttpClient(certPinner: CertificatePinner): OkHttpClient {
+    internal fun provideOkHttpClient(
+        certPinner: CertificatePinner,
+        cache: Cache,
+        cacheControlInterceptor: CacheControlInterceptor,
+        httpLoggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .certificatePinner(certPinner)
+            .cache(cache)
+            .addInterceptor(cacheControlInterceptor)
+            .addInterceptor(httpLoggingInterceptor)
             .build()
     }
+
+    @Provides
+    internal fun provideCache(@ApplicationContext context: Context) =
+        RetrofitConfig.cache(context)
+
+    @Provides
+    internal fun provideCacheControlInterceptor(@ApplicationContext context: Context) =
+        RetrofitConfig.cacheControlInterceptor(context)
+
+    @Provides
+    internal fun provideHttpLoggingInterceptor()  =
+        RetrofitConfig.httpLoggingInterceptor
 
     @Provides
     internal fun provideCertificatePinner() =
