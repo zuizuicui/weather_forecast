@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="size_progress_bar">50dp</dimen>
+    <dimen name="all_padding_4">4dp</dimen>
 </resources>

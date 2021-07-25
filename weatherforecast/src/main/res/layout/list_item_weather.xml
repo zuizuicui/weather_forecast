@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:padding="@dimen/all_padding_4">
 
         <TextView
             android:id="@+id/tv_date"
