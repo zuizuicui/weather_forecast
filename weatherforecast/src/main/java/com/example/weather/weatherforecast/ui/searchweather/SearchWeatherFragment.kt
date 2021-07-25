@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import com.example.weather.weatherforecast.databinding.SearchWeatherFragmentBinding
+import com.example.weather.weatherforecast.di.FragmentComponent
+import com.example.weather.weatherforecast.di.FragmentModule
 import com.example.weather.weatherforecast.di.WeatherForecastComponent
 import com.example.weather.weatherforecast.ui.base.BaseFragment
 import javax.inject.Inject
@@ -23,7 +25,7 @@ class SearchWeatherFragment : BaseFragment() {
 
     private lateinit var viewModel: SearchWeatherViewModel
 
-    override fun inject(fragmentComponent: WeatherForecastComponent) {
+    override fun inject(fragmentComponent: FragmentComponent) {
         fragmentComponent.inject(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(
             SearchWeatherViewModel::class.java
