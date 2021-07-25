@@ -41,7 +41,8 @@ Applied:
 
 **Local Development**
 
-This project uses the Gradle build system. To build this project, use the gradlew build command or use "Import Project" in Android Studio.
+**CHECK OUT CODE MASTER BRANCH**
+Use the gradlew build command or use "Import Project" in Android Studio.
 
 ./gradlew clean build - Build the entire example and execute unit and integration tests plus lint check.
 ./gradlew installDebug - Install the debug apk on the current connected device.
