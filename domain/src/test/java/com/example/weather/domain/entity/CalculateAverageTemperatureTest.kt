@@ -18,6 +18,6 @@ class CalculateAverageTemperatureTest {
             morn = 297.38
         )
 
-        Assert.assertEquals(301.40, sut(temperature), 0.01)
+        Assert.assertEquals(29.25, sut(temperature), 0.01)
     }
 }

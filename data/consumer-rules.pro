@@ -1,0 +1,1 @@
+-keep class com.example.weather.data.remote.*Dto { *; }
