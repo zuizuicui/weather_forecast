@@ -9,11 +9,11 @@ import kotlinx.coroutines.Dispatchers
 @Module
 class DispatcherModule {
 
-//    @DispatcherIO
+    @DispatcherIO
     @Provides
     internal fun provideDispatcherIO() = Dispatchers.IO
 
-//    @DispatcherDefault
-//    @Provides
-//    internal fun provideDispatcherDefault() = Dispatchers.Default
+    @DispatcherDefault
+    @Provides
+    internal fun provideDispatcherDefault() = Dispatchers.Default
 }

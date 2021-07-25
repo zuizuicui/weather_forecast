@@ -5,6 +5,7 @@ import com.example.weather.domain.entity.SelectShowingWeather
 import com.example.weather.domain.interaction.mock.repository.fakeWeatherRepository
 import com.example.weather.domain.model.Weather
 import com.example.weather.domain.model.WeatherElement
+import com.example.weather.domain.dispatcher.DomainDispatchers
 import com.example.weather.domain.repository.WeatherRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -30,7 +31,8 @@ class SearchWeatherInfoUseCaseTest {
         searchWeatherInfoUseCase = SearchWeatherInfoUseCase(
             weatherRepository,
             selectShowingWeather,
-            calculateAverageTemperature
+            calculateAverageTemperature,
+            DomainDispatchers(testDispatcher)
         )
     }
 

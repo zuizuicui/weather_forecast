@@ -1,8 +1,9 @@
 package com.example.weather.data.remote.weather
 
-import com.example.weather.data.repository.WeatherRepositoryImpl
 import com.example.weather.data.build
 import com.example.weather.data.enqueueResponse
+import com.example.weather.data.dispatcher.DataDispatchers
+import com.example.weather.data.repository.WeatherRepositoryImpl
 import com.example.weather.domain.model.CityNotFoundException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -11,7 +12,6 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert
 import org.junit.Test
-import java.lang.RuntimeException
 
 
 @ExperimentalCoroutinesApi
@@ -22,7 +22,7 @@ class WeatherApiTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
 
-    private val sut = WeatherRepositoryImpl(api, testDispatcher)
+    private val sut = WeatherRepositoryImpl(api, DataDispatchers(testDispatcher, testDispatcher))
 
     @After
     fun tearDown() {
