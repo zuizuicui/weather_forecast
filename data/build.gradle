@@ -36,24 +36,14 @@ android {
 dependencies {
     implementation project(path: ':domain')
 
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation androidx_default
 
-    api "com.squareup.retrofit2:converter-gson:2.9.0"
-    api 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    api retrofit
+    kapt kaptDagger
 
-    api 'com.squareup.retrofit2:retrofit:2.9.0'
-    api implementationLibs
-    kapt kaptLibs
+    implementation deps.mapstruct.runtime
+    kapt deps.mapstruct.compiler
 
-    api 'org.mapstruct:mapstruct:1.5.0.Beta1'
-    kapt "org.mapstruct:mapstruct-processor:1.5.0.Beta1"
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.7.2")
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
-    testImplementation 'io.mockk:mockk:1.11.0'
+    testImplementation unit_test
+    testImplementation deps.unit_test.mockwebserver
 }

@@ -36,22 +36,11 @@ android {
 
 dependencies {
     api project(path: ':domain')
-    api fileTree(dir: 'libs', include: ['*.jar'])
 
-    api 'androidx.core:core-ktx:1.6.0'
-    api 'androidx.appcompat:appcompat:1.3.0'
-    api 'com.google.android.material:material:1.4.0'
-    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api deps.androidx.constraintlayout
+    api deps.lifecycle.livedata
+    api deps.lifecycle.viewmodel
+    api androidx_default
 
-    api implementationLibs
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    kapt kaptLibs
-
-    androidTestApi 'androidx.test.ext:junit:1.1.3'
-    androidTestApi 'androidx.test.espresso:espresso-core:3.4.0'
-
-    androidTestApi 'androidx.test.ext:junit:1.1.3'
-    androidTestApi 'androidx.test.espresso:espresso-core:3.4.0'
+    kapt kaptDagger
 }

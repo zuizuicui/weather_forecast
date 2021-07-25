@@ -10,10 +10,8 @@ java {
 }
 
 dependencies {
-    api implementationLibs
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
-    testApi 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
-    testApi 'junit:junit:4.13.2'
-    testApi 'io.mockk:mockk:1.11.0'
+    api implementationDagger
+    api deps.kotlin_stdlib
+    api deps.kotlin.coroutines
+    testImplementation unit_test
 }
