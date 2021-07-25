@@ -1,6 +1,5 @@
 package com.example.weather.data
 
-import com.example.weather.data.remote.WeatherApi
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse

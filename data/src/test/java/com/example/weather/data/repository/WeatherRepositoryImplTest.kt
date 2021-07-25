@@ -1,9 +1,10 @@
-package com.example.weather.data
+package com.example.weather.data.repository
 
-import com.example.weather.data.remote.WeatherApi
+import com.example.weather.data.remote.weather.WeatherApi
 import com.example.weather.data.mock.api.fakeWeatherApiSearch
 import com.example.weather.data.mock.converter.fakeConvertToWeatherElementDto
 import com.example.weather.data.remote.WeatherElementDto
+import com.example.weather.data.repository.WeatherRepositoryImpl
 import com.example.weather.domain.model.WeatherElement
 import io.mockk.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher

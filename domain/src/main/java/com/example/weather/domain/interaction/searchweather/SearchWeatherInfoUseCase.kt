@@ -1,8 +1,7 @@
-package com.example.weather.domain.interaction
+package com.example.weather.domain.interaction.searchweather
 
 import com.example.weather.domain.entity.CalculateAverageTemperature
 import com.example.weather.domain.entity.SelectShowingWeather
-import com.example.weather.domain.interaction.searchweather.WeatherResultElement
 import com.example.weather.domain.repository.WeatherRepository
 import com.example.weather.domain.model.WeatherElement
 import javax.inject.Inject

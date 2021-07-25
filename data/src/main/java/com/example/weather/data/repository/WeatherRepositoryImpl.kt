@@ -1,10 +1,10 @@
-package com.example.weather.data
+package com.example.weather.data.repository
 
  import android.content.res.Resources
  import android.util.Log
  import com.example.weather.data.converter.DataConverter
  import com.example.weather.data.converter.WeatherElementConvert
- import com.example.weather.data.remote.WeatherApi
+ import com.example.weather.data.remote.weather.WeatherApi
  import com.example.weather.domain.model.CityNotFoundException
  import com.example.weather.domain.model.NetworkErrorException
  import com.example.weather.domain.repository.WeatherRepository

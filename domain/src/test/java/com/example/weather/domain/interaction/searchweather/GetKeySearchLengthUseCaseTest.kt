@@ -1,6 +1,7 @@
-package com.example.weather.domain.interaction
+package com.example.weather.domain.interaction.searchweather
 
 import com.example.weather.domain.entity.LengthWeatherSearchKeyRule
+import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
 import org.junit.Assert.*
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.weather.domain.interaction
+package com.example.weather.domain.interaction.searchweather
 
 import com.example.weather.domain.entity.LengthWeatherSearchKeyRule
 import javax.inject.Inject

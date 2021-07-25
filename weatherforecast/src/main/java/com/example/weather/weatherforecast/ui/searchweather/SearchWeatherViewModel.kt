@@ -2,15 +2,12 @@ package com.example.weather.weatherforecast.ui.searchweather
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.common.ui.CommonViewModel
 import com.example.weather.common.ui.CommonViewState
-import com.example.weather.common.ui.ViewState
-import com.example.weather.domain.interaction.GetKeySearchLengthUseCase
-import com.example.weather.domain.interaction.SearchWeatherInfoUseCase
+import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
+import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
 import com.example.weather.domain.model.FailRequestException
-import com.example.weather.domain.model.WeatherElement
 import com.example.weather.weatherforecast.ui.util.dateFormat
 import kotlinx.coroutines.launch
 import java.lang.Exception

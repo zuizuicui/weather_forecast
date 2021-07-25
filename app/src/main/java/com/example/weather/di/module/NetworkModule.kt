@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.weather.common.di.qualifier.ApplicationContext
 import com.example.weather.data.config.CacheControlInterceptor
 import com.example.weather.data.config.RetrofitConfig
-import com.example.weather.data.remote.WeatherApi
+import com.example.weather.data.remote.weather.WeatherApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -67,7 +67,4 @@ class NetworkModule {
     fun provideGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create(Gson())
     }
-
-    @Provides
-    internal fun provideWeatherApi(retrofit: Retrofit) = retrofit.create(WeatherApi::class.java)
 }

@@ -1,7 +1,7 @@
 package com.example.weather.weatherforecast.ui.searchweather
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.weather.domain.interaction.SearchWeatherInfoUseCase
+import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
 import com.example.weather.domain.model.WeatherElement
 import com.example.weather.weatherforecast.util.MainCoroutineRule
 import com.example.weather.weatherforecast.util.getOrAwaitValue

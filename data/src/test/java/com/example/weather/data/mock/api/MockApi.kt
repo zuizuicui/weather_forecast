@@ -1,7 +1,7 @@
 package com.example.weather.data.mock.api
 
 import com.example.weather.data.remote.SearchWeatherResponse
-import com.example.weather.data.remote.WeatherApi
+import com.example.weather.data.remote.weather.WeatherApi
 import com.example.weather.data.remote.WeatherElementDto
 import io.mockk.coEvery
 import io.mockk.every
