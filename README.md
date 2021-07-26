@@ -59,11 +59,11 @@ Use the gradlew build command or use "Import Project" in Android Studio.
 
 
 7. Exception handling 
-8. Caching handling
+8. Caching handling (retrofit cache)
 9. Secure Android app from: 
 
-* DecompileAPK  
-* Data transmission via network
+* DecompileAPK   (proguard)
+* Data transmission via network (retrofit public key pinning)
 
 
 
