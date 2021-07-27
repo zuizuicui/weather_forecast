@@ -36,13 +36,16 @@ android {
 dependencies {
     implementation project(path: ':domain')
 
-    implementation androidx_default
+    implementation deps.kotlin_stdlib
+    implementation deps.kotlin.coroutines
 
-    api retrofit
-    kapt kaptDagger
+    implementation retrofit
 
     implementation deps.mapstruct.runtime
     kapt deps.mapstruct.compiler
+
+    implementation implementationDagger
+    kapt kaptDagger
 
     testImplementation unit_test
     testImplementation deps.unit_test.mockwebserver

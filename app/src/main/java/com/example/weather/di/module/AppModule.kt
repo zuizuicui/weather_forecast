@@ -2,15 +2,16 @@ package com.example.weather.di.module
 
 import android.app.Application
 import android.content.Context
-import com.example.weather.common.di.qualifier.ApplicationContext
+import com.example.weather.data.di.NetworkModule
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
-@Module(includes = [NetworkModule::class, DispatcherModule::class])
+@Module(includes = [DispatcherModule::class])
 class AppModule(private val application: Application) {
 
     @Provides
-    @ApplicationContext
+    @Named("application.context")
     internal fun provideContext(): Context {
         return application
     }

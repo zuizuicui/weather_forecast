@@ -45,6 +45,15 @@ android {
 dependencies {
     implementation project(path: ':data')
     implementation project(path: ':common')
+    implementation project(path: ':domain')
     implementation project(path: ':weatherforecast')
+
+    implementation deps.kotlin_stdlib
+    implementation deps.kotlin.coroutines
+
+    implementation androidx_default
+
+    implementation implementationDagger
+
     kapt kaptDagger
 }

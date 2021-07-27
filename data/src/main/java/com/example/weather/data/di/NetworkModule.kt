@@ -1,10 +1,8 @@
-package com.example.weather.di.module
+package com.example.weather.data.di
 
 import android.content.Context
-import com.example.weather.common.di.qualifier.ApplicationContext
 import com.example.weather.data.config.CacheControlInterceptor
 import com.example.weather.data.config.RetrofitConfig
-import com.example.weather.data.remote.weather.WeatherApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -14,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -43,11 +42,11 @@ class NetworkModule {
     }
 
     @Provides
-    internal fun provideCache(@ApplicationContext context: Context) =
+    internal fun provideCache(@Named("application.context") context: Context) =
         RetrofitConfig.cache(context)
 
     @Provides
-    internal fun provideCacheControlInterceptor(@ApplicationContext context: Context) =
+    internal fun provideCacheControlInterceptor(@Named("application.context") context: Context) =
         RetrofitConfig.cacheControlInterceptor(context)
 
     @Provides

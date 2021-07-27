@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
 }
 
 android {
@@ -35,12 +34,12 @@ android {
 }
 
 dependencies {
-    api project(path: ':domain')
+    implementation deps.kotlin_stdlib
+    implementation deps.kotlin.coroutines
 
-    api deps.androidx.constraintlayout
-    api deps.lifecycle.livedata
-    api deps.lifecycle.viewmodel
-    api androidx_default
+    implementation androidx_default
+    implementation deps.lifecycle.livedata
+    implementation deps.lifecycle.viewmodel
 
-    kapt kaptDagger
+    implementation implementationDagger
 }
