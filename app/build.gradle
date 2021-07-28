@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -51,9 +52,11 @@ dependencies {
     implementation deps.kotlin_stdlib
     implementation deps.kotlin.coroutines
 
+    implementation retrofit
+
     implementation androidx_default
 
-    implementation implementationDagger
+    implementation implementationHilt
 
-    kapt kaptDagger
+    kapt kaptHilt
 }

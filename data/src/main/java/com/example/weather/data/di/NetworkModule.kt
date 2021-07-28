@@ -6,6 +6,9 @@ import com.example.weather.data.config.RetrofitConfig
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
@@ -15,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
 
@@ -42,11 +46,11 @@ class NetworkModule {
     }
 
     @Provides
-    internal fun provideCache(@Named("application.context") context: Context) =
+    internal fun provideCache(@ApplicationContext context: Context) =
         RetrofitConfig.cache(context)
 
     @Provides
-    internal fun provideCacheControlInterceptor(@Named("application.context") context: Context) =
+    internal fun provideCacheControlInterceptor(@ApplicationContext context: Context) =
         RetrofitConfig.cacheControlInterceptor(context)
 
     @Provides

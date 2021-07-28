@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -45,12 +46,13 @@ dependencies {
     implementation deps.kotlin.coroutines
 
     implementation androidx_default
+    implementation deps.androidx.fragment_ktx
     implementation deps.androidx.constraintlayout
     implementation deps.lifecycle.livedata
     implementation deps.lifecycle.viewmodel
 
-    implementation implementationDagger
-    kapt kaptDagger
+    implementation implementationHilt
+    kapt kaptHilt
 
     testImplementation unit_test
     testImplementation deps.unit_test.espresso_core_testing

@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -41,5 +42,6 @@ dependencies {
     implementation deps.lifecycle.livedata
     implementation deps.lifecycle.viewmodel
 
-    implementation implementationDagger
+    implementation implementationHilt
+    kapt kaptHilt
 }

@@ -9,11 +9,14 @@ import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUs
 import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
 import com.example.weather.domain.model.FailRequestException
 import com.example.weather.weatherforecast.ui.util.dateFormat
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
+@HiltViewModel
 class SearchWeatherViewModel @Inject constructor (
     val getKeySearchLengthUseCase: GetKeySearchLengthUseCase,
     val searchWeatherInfoUseCase: SearchWeatherInfoUseCase

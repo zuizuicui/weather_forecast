@@ -4,8 +4,11 @@ import com.example.weather.common.di.qualifier.DispatcherDefault
 import com.example.weather.common.di.qualifier.DispatcherIO
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 
+@InstallIn(SingletonComponent::class)
 @Module
 class DispatcherModule {
 

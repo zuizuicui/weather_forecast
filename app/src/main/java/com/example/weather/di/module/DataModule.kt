@@ -9,9 +9,12 @@ import com.example.weather.data.di.RepositoryModule
 import com.example.weather.data.dispatcher.DataDispatchers
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 
-@Module( includes = [ConverterModule::class, RepositoryModule::class, ApiModule::class, NetworkModule::class])
+@InstallIn(SingletonComponent::class)
+@Module( includes = [ConverterModule::class, RepositoryModule::class, ApiModule::class])
 class DataModule {
     @Provides
     internal fun domainDispatcherProvider(

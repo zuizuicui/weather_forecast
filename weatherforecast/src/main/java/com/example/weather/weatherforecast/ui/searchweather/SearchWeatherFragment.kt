@@ -4,33 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+import com.example.weather.common.ui.CommonFragment
 import com.example.weather.weatherforecast.databinding.SearchWeatherFragmentBinding
-import com.example.weather.weatherforecast.di.FragmentComponent
-import com.example.weather.weatherforecast.di.FragmentModule
-import com.example.weather.weatherforecast.di.WeatherForecastComponent
-import com.example.weather.weatherforecast.ui.base.BaseFragment
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class SearchWeatherFragment : BaseFragment() {
-
+@AndroidEntryPoint
+class SearchWeatherFragment : CommonFragment() {
     companion object {
         fun newInstance() = SearchWeatherFragment()
     }
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private lateinit var viewModel: SearchWeatherViewModel
-
-    override fun inject(fragmentComponent: FragmentComponent) {
-        fragmentComponent.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(
-            SearchWeatherViewModel::class.java
-        )
-    }
+    private val viewModel: SearchWeatherViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
