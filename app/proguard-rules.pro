@@ -20,4 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep class * extends androidx.databinding.DataBinderMapper { *; }
--keep public class com.example.weather.data.converter.**
+-keep public class com.example.weather.data.repository.converter.**

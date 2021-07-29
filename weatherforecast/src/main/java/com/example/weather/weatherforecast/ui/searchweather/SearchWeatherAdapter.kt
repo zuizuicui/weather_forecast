@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather.domain.model.WeatherElement
 import com.example.weather.weatherforecast.databinding.ListItemWeatherBinding
 
 class SearchWeatherAdapter : ListAdapter<WeatherModel, RecyclerView.ViewHolder>(WeatherDiffCallback()) {

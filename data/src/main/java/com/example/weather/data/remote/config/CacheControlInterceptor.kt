@@ -1,4 +1,4 @@
-package com.example.weather.data.config
+package com.example.weather.data.remote.config
 
 import android.content.Context
 import okhttp3.CacheControl

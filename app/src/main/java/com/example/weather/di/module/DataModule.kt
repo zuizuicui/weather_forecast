@@ -4,9 +4,8 @@ import com.example.weather.common.di.qualifier.DispatcherDefault
 import com.example.weather.common.di.qualifier.DispatcherIO
 import com.example.weather.data.di.ApiModule
 import com.example.weather.data.di.ConverterModule
-import com.example.weather.data.di.NetworkModule
 import com.example.weather.data.di.RepositoryModule
-import com.example.weather.data.dispatcher.DataDispatchers
+import com.example.weather.data.repository.dispatcher.DataDispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
 package com.example.weather.data.di
 
-import com.example.weather.data.converter.DataConverter
+import com.example.weather.data.repository.converter.DataConverter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,9 +1,8 @@
-package com.example.weather.data.config
+package com.example.weather.data.remote.config
 
 import android.content.Context
-import android.net.ConnectivityManager
-import com.example.weather.data.config.NetworkUtil.hasNetworkConnection
-import com.example.weather.domain.model.NetworkErrorException
+import com.example.weather.data.remote.config.NetworkUtil.hasNetworkConnection
+import com.example.weather.domain.entity.exception.NetworkErrorException
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

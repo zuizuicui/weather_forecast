@@ -1,18 +1,4 @@
-package com.example.weather.domain.model
-
-data class City(
-    val id: Long,
-    val name: String,
-    val coordinate: Coordinate,
-    val country: String,
-    val population: Long,
-    val timezone: Long
-)
-
-data class Coordinate(
-    val lon: Double,
-    val lat: Double
-)
+package com.example.weather.domain.entity
 
 data class WeatherElement (
     val date: Long,
@@ -33,15 +19,6 @@ data class WeatherElement (
 
 data class FeelsLike(
     val day: Double,
-    val night: Double,
-    val eve: Double,
-    val morn: Double
-)
-
-data class Temperature(
-    val day: Double,
-    val min: Double,
-    val max: Double,
     val night: Double,
     val eve: Double,
     val morn: Double

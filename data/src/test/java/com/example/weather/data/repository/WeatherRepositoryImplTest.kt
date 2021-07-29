@@ -3,9 +3,9 @@ package com.example.weather.data.repository
 import com.example.weather.data.remote.weather.WeatherApi
 import com.example.weather.data.mock.api.fakeWeatherApiSearch
 import com.example.weather.data.mock.converter.fakeConvertToWeatherElementDto
-import com.example.weather.data.dispatcher.DataDispatchers
+import com.example.weather.data.repository.dispatcher.DataDispatchers
 import com.example.weather.data.remote.WeatherElementDto
-import com.example.weather.domain.model.WeatherElement
+import com.example.weather.domain.entity.WeatherElement
 import io.mockk.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest

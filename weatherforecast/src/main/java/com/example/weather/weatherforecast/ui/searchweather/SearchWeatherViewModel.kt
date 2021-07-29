@@ -7,10 +7,10 @@ import com.example.weather.common.ui.CommonViewModel
 import com.example.weather.common.ui.CommonViewState
 import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
 import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
-import com.example.weather.domain.model.FailRequestException
+import com.example.weather.domain.entity.exception.FailRequestException
+import com.example.weather.domain.interaction.searchweather.WeatherResultItem
 import com.example.weather.weatherforecast.ui.util.dateFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
@@ -33,22 +33,17 @@ class SearchWeatherViewModel @Inject constructor (
     }
 
     private fun getMinSearchKeyLength() = viewModelScope.launch {
-        _minSearchKeyLength.value = getKeySearchLengthUseCase()
+        try {
+            _minSearchKeyLength.value = getKeySearchLengthUseCase()
+        } catch (e: Exception) {
+            // will not happen
+        }
     }
 
     fun searchWeather(keySearch: String) = viewModelScope.launch {
-        _viewState.value = CommonViewState.LOADING
         try {
-            val result = searchWeatherInfoUseCase(keySearch)
-            _weatherInfo.value = result.map {
-                WeatherModel(
-                    date = it.date.dateFormat(),
-                    aveTemp = it.averageTemp.roundToInt().toString(),
-                    pressure = it.pressure.toString(),
-                    humidity = it.humidity.toString(),
-                    description = it.description
-                )
-            }
+            _viewState.value = CommonViewState.LOADING
+            _weatherInfo.value = searchWeatherInfoUseCase(keySearch).map { toWeatherModelView(it) }
             _viewState.value = CommonViewState.HAS_RESULT
         } catch (e: FailRequestException) {
             _viewState.value = CommonViewState.NO_RESULT
@@ -56,6 +51,16 @@ class SearchWeatherViewModel @Inject constructor (
             e.printStackTrace()
             _viewState.value = CommonViewState.ERROR
         }
+    }
+
+    private fun toWeatherModelView(result: WeatherResultItem) : WeatherModel {
+        return WeatherModel(
+            date = result.date.dateFormat(),
+            aveTemp = result.averageTemp.roundToInt().toString(),
+            pressure = result.pressure.toString(),
+            humidity = result.humidity.toString(),
+            description = result.description
+        )
     }
 
 }

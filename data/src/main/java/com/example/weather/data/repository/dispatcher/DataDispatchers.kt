@@ -1,4 +1,4 @@
-package com.example.weather.data.dispatcher
+package com.example.weather.data.repository.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject

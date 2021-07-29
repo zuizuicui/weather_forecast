@@ -1,6 +1,6 @@
 package com.example.weather.domain.interaction.mock.repository
 
-import com.example.weather.domain.model.WeatherElement
+import com.example.weather.domain.entity.WeatherElement
 import com.example.weather.domain.repository.WeatherRepository
 import io.mockk.coEvery
 import io.mockk.mockk

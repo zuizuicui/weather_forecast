@@ -1,6 +1,5 @@
 package com.example.weather.domain.entity
 
-import com.example.weather.domain.model.Temperature
 import org.junit.Assert
 import org.junit.Test
 

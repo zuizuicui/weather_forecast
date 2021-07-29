@@ -1,4 +1,4 @@
-package com.example.weather.domain.dispatcher
+package com.example.weather.domain.interaction
 
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject

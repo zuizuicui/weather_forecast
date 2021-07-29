@@ -2,9 +2,9 @@ package com.example.weather.data.remote.weather
 
 import com.example.weather.data.build
 import com.example.weather.data.enqueueResponse
-import com.example.weather.data.dispatcher.DataDispatchers
+import com.example.weather.data.repository.dispatcher.DataDispatchers
 import com.example.weather.data.repository.WeatherRepositoryImpl
-import com.example.weather.domain.model.CityNotFoundException
+import com.example.weather.domain.entity.exception.CityNotFoundException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher

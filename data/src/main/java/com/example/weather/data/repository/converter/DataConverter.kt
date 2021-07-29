@@ -1,7 +1,7 @@
-package com.example.weather.data.converter
+package com.example.weather.data.repository.converter
 
 import com.example.weather.data.remote.*
-import com.example.weather.domain.model.*
+import com.example.weather.domain.entity.*
 import org.mapstruct.InheritInverseConfiguration
 import org.mapstruct.Mapper
 import org.mapstruct.factory.Mappers

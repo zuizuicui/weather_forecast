@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weather.common.ui.CommonViewState
 import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
 import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
-import com.example.weather.domain.interaction.searchweather.WeatherResultElement
+import com.example.weather.domain.interaction.searchweather.WeatherResultItem
 import com.example.weather.weatherforecast.util.MainCoroutineRule
 import com.example.weather.weatherforecast.util.getOrAwaitValue
 import io.mockk.coEvery
@@ -71,7 +71,7 @@ class SearchWeatherViewModelTest {
         pressure: Long = 100,
         humidity: Long = 70,
         description: String = ""
-    ) = WeatherResultElement(
+    ) = WeatherResultItem(
         date, averageTemp, pressure, humidity, description
     )
 }

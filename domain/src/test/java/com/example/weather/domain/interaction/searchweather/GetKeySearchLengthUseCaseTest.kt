@@ -1,7 +1,5 @@
 package com.example.weather.domain.interaction.searchweather
 
-import com.example.weather.domain.dispatcher.DomainDispatchers
-import com.example.weather.domain.entity.LengthWeatherSearchKeyRule
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -12,7 +10,7 @@ class GetKeySearchLengthUseCaseTest {
 
     @Test
     fun testGetLengthKeySearch_shouldReturn3() {
-        val sut = GetKeySearchLengthUseCase(LengthWeatherSearchKeyRule(), DomainDispatchers(testDispatcher))
+        val sut = GetKeySearchLengthUseCase()
         testDispatcher.runBlockingTest {
             assertEquals(3, sut())
         }

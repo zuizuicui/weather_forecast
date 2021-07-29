@@ -1,8 +1,8 @@
 package com.example.weather.data.di
 
 import android.content.Context
-import com.example.weather.data.config.CacheControlInterceptor
-import com.example.weather.data.config.RetrofitConfig
+import com.example.weather.data.remote.config.CacheControlInterceptor
+import com.example.weather.data.remote.config.RetrofitConfig
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
