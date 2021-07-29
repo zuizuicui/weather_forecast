@@ -46,7 +46,9 @@ buildscript {
             ],
             'hilt'    : [
                     'runtime': "com.google.dagger:hilt-android:${versions.hilt}",
-                    'compiler': "com.google.dagger:hilt-android-compiler:${versions.hilt}"
+                    'compiler': "com.google.dagger:hilt-android-compiler:${versions.hilt}",
+                    'test_runtime': "com.google.dagger:hilt-android-testing:${versions.hilt}",
+                    'test_compiler': "com.google.dagger:hilt-android-compiler:${versions.hilt}"
             ],
             'network'   : [
                     'retrofit_gson' : "com.squareup.retrofit2:converter-gson:${versions.converter_gson}",
@@ -58,6 +60,7 @@ buildscript {
                     'espresso_core': "androidx.test.espresso:espresso-core:${versions.espresso_core}",
                     'espresso_contrib': "androidx.test.espresso:espresso-contrib:${versions.espresso_core}",
                     'espresso_intents': "androidx.test.espresso:espresso-intents:${versions.espresso_core}",
+                    'mockk': "io.mockk:mockk-android:${versions.mockk}"
 
             ],
             'unit_test' : [
