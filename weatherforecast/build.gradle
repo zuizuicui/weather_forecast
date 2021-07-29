@@ -14,8 +14,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.weather.weatherforecast.CustomTestRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -58,4 +57,7 @@ dependencies {
     testImplementation deps.unit_test.espresso_core_testing
 
     androidTestImplementation android_test
+    androidTestImplementation deps.android_test.mockk
+    androidTestImplementation deps.hilt.test_runtime
+    kaptAndroidTest deps.hilt.test_compiler
 }
