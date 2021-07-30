@@ -1,12 +1,11 @@
 package com.example.weather.data.repository
 
- import android.content.res.Resources
  import com.example.weather.data.remote.weather.WeatherApi
  import com.example.weather.data.repository.converter.WeatherElementConvert
  import com.example.weather.data.repository.dispatcher.DataDispatchers
  import com.example.weather.domain.entity.exception.CityNotFoundException
  import com.example.weather.domain.entity.exception.NetworkErrorException
- import com.example.weather.domain.entity.exception.UnknowException
+ import com.example.weather.domain.entity.exception.UnKnowException
  import com.example.weather.domain.repository.WeatherRepository
  import kotlinx.coroutines.withContext
  import javax.inject.Inject
@@ -29,7 +28,7 @@ class WeatherRepositoryImpl @Inject constructor(
         } catch (e: CityNotFoundException) {
             throw e
         } catch (e: Exception) {
-            throw UnknowException()
+            throw UnKnowException()
         }
     }
 }

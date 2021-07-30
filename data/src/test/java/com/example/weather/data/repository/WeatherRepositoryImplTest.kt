@@ -8,12 +8,11 @@ import com.example.weather.data.remote.WeatherElementDto
 import com.example.weather.domain.entity.WeatherElement
 import com.example.weather.domain.entity.exception.CityNotFoundException
 import com.example.weather.domain.entity.exception.NetworkErrorException
-import com.example.weather.domain.entity.exception.UnknowException
+import com.example.weather.domain.entity.exception.UnKnowException
 import io.mockk.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Test
 import java.lang.RuntimeException
 
@@ -80,7 +79,7 @@ class WeatherRepositoryImplTest {
         }
     }
 
-    @Test (expected = UnknowException::class)
+    @Test (expected = UnKnowException::class)
     fun `test search weather info return unknow error`() {
         val keySearch = "hanoi"
         val weatherApiFail : WeatherApi = fakeWeatherApiSearch(exception = RuntimeException())
