@@ -10,7 +10,7 @@ import io.mockk.mockk
 fun fakeWeatherApiSearch(
     searchWeatherResponse: SearchWeatherResponse = mockk(),
     responseCode: String = "200",
-    weatherListDto: List<WeatherElementDto>
+    weatherListDto: List<WeatherElementDto>? = null
 ) = mockk<WeatherApi>().apply {
     every { searchWeatherResponse.isSuccess()} returns (responseCode == "200")
     every { searchWeatherResponse.code} returns responseCode

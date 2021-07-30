@@ -42,9 +42,6 @@ dependencies {
 
     implementation retrofit
 
-    implementation deps.mapstruct.runtime
-    kapt deps.mapstruct.compiler
-
     implementation implementationHilt
     kapt kaptHilt
 

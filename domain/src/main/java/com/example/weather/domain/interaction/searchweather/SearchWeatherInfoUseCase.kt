@@ -41,11 +41,11 @@ class SearchWeatherInfoUseCase @Inject constructor (
         description = selectShowingWeather(weatherElement.weather)?.description ?: ""
     )
 
-    private fun calculateTemperatureAverage(temperature: Temperature) : Double {
-        return temperature.average().defaultTemperatureToCelsius()
+    private fun calculateTemperatureAverage(temperature: Temperature?) : Double {
+        return temperature?.average()?.defaultTemperatureToCelsius() ?: Double.NaN
     }
 
-    private fun selectShowingWeather(weathers: List<Weather>) : Weather? {
-        return weathers.firstOrNull()
+    private fun selectShowingWeather(weathers: List<Weather>?) : Weather? {
+        return weathers?.firstOrNull()
     }
 }
