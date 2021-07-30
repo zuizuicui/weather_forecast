@@ -4,7 +4,7 @@ import com.example.weather.domain.entity.WeatherElement
 import com.example.weather.domain.interaction.DomainDispatchers
 import com.example.weather.domain.entity.LengthSearchKeyRule
 import com.example.weather.domain.entity.Temperature
-import com.example.weather.domain.entity.Temperature.Companion.defaultTemperatureToCelsius
+import com.example.weather.domain.entity.Temperature.TemperatureUnit.CELSIUS
 import com.example.weather.domain.entity.Weather
 import com.example.weather.domain.entity.exception.InvalidInputException
 import com.example.weather.domain.interaction.SuspendUseCase
@@ -42,7 +42,7 @@ class SearchWeatherInfoUseCase @Inject constructor (
     )
 
     private fun calculateTemperatureAverage(temperature: Temperature?) : Double {
-        return temperature?.average()?.defaultTemperatureToCelsius() ?: Double.NaN
+        return temperature?.average(CELSIUS) ?: Double.NaN
     }
 
     private fun selectShowingWeather(weathers: List<Weather>?) : Weather? {

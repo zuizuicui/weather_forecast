@@ -7,12 +7,15 @@ import com.example.weather.data.repository.dispatcher.DataDispatchers
 import com.example.weather.data.remote.WeatherElementDto
 import com.example.weather.domain.entity.WeatherElement
 import com.example.weather.domain.entity.exception.CityNotFoundException
+import com.example.weather.domain.entity.exception.NetworkErrorException
+import com.example.weather.domain.entity.exception.UnknowException
 import io.mockk.*
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import java.lang.RuntimeException
 
 class WeatherRepositoryImplTest {
     private val testDispatcher = TestCoroutineDispatcher()
@@ -20,26 +23,16 @@ class WeatherRepositoryImplTest {
     private val weatherListDto = listOf(mockk<WeatherElementDto>())
     private val weatherList = listOf(mockk<WeatherElement>())
 
-    private val weatherApiSuccess : WeatherApi = fakeWeatherApiSearch(weatherListDto = weatherListDto)
-    private val weatherApiFail : WeatherApi = fakeWeatherApiSearch(responseCode = "500")
-
     private val dispatchers = DataDispatchers(testDispatcher, testDispatcher)
     private val weatherElementConvert = fakeConvertToWeatherElementDto(weatherListDto, weatherList)
 
     private lateinit var weatherRepository : WeatherRepositoryImpl
 
-    @Before
-    fun setUp() {
-        weatherRepository = WeatherRepositoryImpl(
-            weatherApiSuccess,
-            DataDispatchers(testDispatcher, testDispatcher),
-            weatherElementConvert
-        )
-    }
-
     @Test
     fun `test search weather info return success`() {
         val keySearch = "hanoi"
+
+        val weatherApiSuccess : WeatherApi = fakeWeatherApiSearch(weatherListDto = weatherListDto)
 
         weatherRepository = WeatherRepositoryImpl(
             weatherApiSuccess,
@@ -58,6 +51,39 @@ class WeatherRepositoryImplTest {
     @Test (expected = CityNotFoundException::class)
     fun `test search weather info return fail`() {
         val keySearch = "hanoi"
+        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(responseCode = "500")
+
+        weatherRepository = WeatherRepositoryImpl(
+            weatherApiFail,
+            dispatchers,
+            weatherElementConvert
+        )
+
+        testDispatcher.runBlockingTest {
+            weatherRepository.searchWeather(keySearch)
+        }
+    }
+
+    @Test (expected = NetworkErrorException::class)
+    fun `test search weather info return network error`() {
+        val keySearch = "hanoi"
+        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(exception = NetworkErrorException())
+
+        weatherRepository = WeatherRepositoryImpl(
+            weatherApiFail,
+            dispatchers,
+            weatherElementConvert
+        )
+
+        testDispatcher.runBlockingTest {
+            weatherRepository.searchWeather(keySearch)
+        }
+    }
+
+    @Test (expected = UnknowException::class)
+    fun `test search weather info return unknow error`() {
+        val keySearch = "hanoi"
+        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(exception = RuntimeException())
 
         weatherRepository = WeatherRepositoryImpl(
             weatherApiFail,
