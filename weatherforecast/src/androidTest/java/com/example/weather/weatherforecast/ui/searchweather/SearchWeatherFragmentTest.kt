@@ -8,19 +8,17 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.weather.common.ui.CommonViewState
-import com.example.weather.common.ui.ViewState
 import com.example.weather.weatherforecast.R
 import com.example.weather.weatherforecast.WeatherForecastActivity
 import com.example.weather.weatherforecast.mock.MockSearchWeatherViewModel.createWeatherModel
+import com.example.weather.weatherforecast.mock.MockSearchWeatherViewModel.mockSearchWeatherViewModel
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import io.mockk.every
-import io.mockk.mockk
 import io.mockk.verify
 import org.hamcrest.Matchers.not
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -31,22 +29,7 @@ class SearchWeatherFragmentTest {
     var hiltRule = HiltAndroidRule(this)
 
     @BindValue
-    val viewModel = mockk<SearchWeatherViewModel>(relaxed = true)
-
-    private lateinit var minSearchKeyLength: MutableLiveData<Int>
-    private lateinit var weatherElements: MutableLiveData<List<WeatherModel>>
-    private lateinit var viewState: MutableLiveData<ViewState>
-
-    @Before
-    fun setup() {
-        minSearchKeyLength = MutableLiveData(3)
-        weatherElements = MutableLiveData<List<WeatherModel>>(listOf())
-        viewState = MutableLiveData<ViewState>(CommonViewState.EMPTY)
-
-        every { viewModel.minSearchKeyLength } returns minSearchKeyLength
-        every { viewModel.weatherElements } returns weatherElements
-        every { viewModel.viewState } returns viewState
-    }
+    val viewModel = mockSearchWeatherViewModel()
 
     @Test
     fun showUi() {
@@ -118,7 +101,8 @@ class SearchWeatherFragmentTest {
 
         activityScenario.onActivity { activity ->
             // Disable animations in RecyclerView
-            val itemShowing = (activity.findViewById<RecyclerView>(R.id.weatherList)).adapter?.itemCount
+            val itemShowing =
+                (activity.findViewById<RecyclerView>(R.id.weatherList)).adapter?.itemCount
             Assert.assertEquals(1, itemShowing)
         }
     }
