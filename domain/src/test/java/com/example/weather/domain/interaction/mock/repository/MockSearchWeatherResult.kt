@@ -15,7 +15,7 @@ object MockSearchWeatherResult {
     val nullObject =
         WeatherResultItem(
             date=0,
-            averageTemp= Double.NaN,
+            averageTemp= 0.0,
             pressure=0,
             humidity=0,
             description=""

@@ -42,7 +42,7 @@ class SearchWeatherInfoUseCase @Inject constructor (
     )
 
     private fun calculateTemperatureAverage(temperature: Temperature?) : Double {
-        return temperature?.average(CELSIUS) ?: Double.NaN
+        return temperature?.average(CELSIUS) ?: 0.0
     }
 
     private fun selectShowingWeather(weathers: List<Weather>?) : Weather? {

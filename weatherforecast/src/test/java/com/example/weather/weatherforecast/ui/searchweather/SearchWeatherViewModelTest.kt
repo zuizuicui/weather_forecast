@@ -3,8 +3,8 @@ package com.example.weather.weatherforecast.ui.searchweather
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weather.common.ui.CommonViewState
 import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
-import com.example.weather.domain.interaction.searchweather.WeatherResultItem
 import com.example.weather.weatherforecast.mock.MockSearchUseCase.mockSearchUseCase
+import com.example.weather.weatherforecast.mock.MockWeatherModel
 import com.example.weather.weatherforecast.util.MainCoroutineRule
 import com.example.weather.weatherforecast.util.getOrAwaitValue
 import com.example.weather.weatherforecast.util.observeForTesting
@@ -48,14 +48,14 @@ class SearchWeatherViewModelTest {
     @Test
     fun searchWeather_returnEmpty() {
         val searchWeatherUseCase = mockSearchUseCase( listOf(
-            createWeatherResult(),
-            createWeatherResult()
+            MockWeatherModel.createWeatherResult(),
+            MockWeatherModel.createWeatherResult()
         ))
         val keySearch = "hanoi"
 
         val expectedModel = listOf(
-            createWeatherModel(),
-            createWeatherModel()
+            MockWeatherModel.createWeatherModel(),
+            MockWeatherModel.createWeatherModel()
         )
 
         viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, searchWeatherUseCase)
@@ -74,24 +74,4 @@ class SearchWeatherViewModelTest {
             Assert.assertEquals (expectedModel, weatherModel)
         }
     }
-
-    private fun createWeatherResult(
-        date: Long = 1627272000,
-        averageTemp: Double = 30.0,
-        pressure: Long = 100,
-        humidity: Long = 70,
-        description: String = "moderate rain"
-    ) = WeatherResultItem(
-        date, averageTemp, pressure, humidity, description
-    )
-
-    private fun createWeatherModel(
-        date: String = "Mon, 26 Jul 2021",
-        averageTemp: String = "30",
-        pressure: String = "100",
-        humidity: String = "70",
-        description: String = "moderate rain"
-    ) = WeatherModel (
-        date, averageTemp, pressure, humidity, description
-    )
 }
