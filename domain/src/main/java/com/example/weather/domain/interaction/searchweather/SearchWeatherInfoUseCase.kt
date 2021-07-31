@@ -19,11 +19,11 @@ class SearchWeatherInfoUseCase @Inject constructor (
 ) :SuspendUseCase<String, List<WeatherResultItem>> {
 
     override suspend operator fun invoke(keySearch: String): List<WeatherResultItem> = withContext(dispatchers.default) {
-        val weatherElementList = weatherRepository.searchWeather(keySearch)
-
         if (keySearch.length < LengthSearchKeyRule.searchWeatherMinLength) {
             throw InvalidInputException()
         }
+
+        val weatherElementList = weatherRepository.searchWeather(keySearch)
 
         return@withContext weatherElementList.map {
             ensureActive()

@@ -17,6 +17,7 @@ package com.example.weather.weatherforecast.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import io.mockk.mockk
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
@@ -58,11 +59,11 @@ fun <T> LiveData<T>.getOrAwaitValue(
 /**
  * Observes a [LiveData] until the `block` is done executing.
  */
-fun <T> LiveData<T>.observeForTesting(block: () -> Unit) {
-    val observer = Observer<T> { }
+fun <T> LiveData<T>.observeForTesting(block: (Observer<T>) -> Unit) {
+    val observer = mockk<Observer<T>>(relaxed = true)
     try {
         observeForever(observer)
-        block()
+        block(observer)
     } finally {
         removeObserver(observer)
     }

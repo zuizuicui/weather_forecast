@@ -62,36 +62,4 @@ class WeatherRepositoryImplTest {
             weatherRepository.searchWeather(keySearch)
         }
     }
-
-    @Test (expected = NetworkErrorException::class)
-    fun `test search weather info return network error`() {
-        val keySearch = "hanoi"
-        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(exception = NetworkErrorException())
-
-        weatherRepository = WeatherRepositoryImpl(
-            weatherApiFail,
-            dispatchers,
-            weatherElementConvert
-        )
-
-        testDispatcher.runBlockingTest {
-            weatherRepository.searchWeather(keySearch)
-        }
-    }
-
-    @Test (expected = UnKnowException::class)
-    fun `test search weather info return unknow error`() {
-        val keySearch = "hanoi"
-        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(exception = RuntimeException())
-
-        weatherRepository = WeatherRepositoryImpl(
-            weatherApiFail,
-            dispatchers,
-            weatherElementConvert
-        )
-
-        testDispatcher.runBlockingTest {
-            weatherRepository.searchWeather(keySearch)
-        }
-    }
 }

@@ -2,7 +2,7 @@ package com.example.weather.common.ui
 
 import androidx.annotation.StringRes
 
-interface ViewState
+sealed interface ViewState
 
 enum class CommonViewState : ViewState {
     LOADING,
