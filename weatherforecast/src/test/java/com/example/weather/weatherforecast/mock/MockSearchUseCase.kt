@@ -4,11 +4,17 @@ import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUse
 import com.example.weather.domain.interaction.searchweather.WeatherResultItem
 import io.mockk.coEvery
 import io.mockk.mockk
+import java.lang.Exception
 
 object MockSearchUseCase {
     fun mockSearchUseCase (
-        weatherResult: List<WeatherResultItem> = emptyList()
+        weatherResult: List<WeatherResultItem> = emptyList(),
+        exception: Exception? = null
     )  = mockk<SearchWeatherInfoUseCase>().also {
-        coEvery { it(any()) } returns weatherResult
+        if (exception != null) {
+            coEvery { it(any()) } throws exception
+        } else {
+            coEvery { it(any()) } returns weatherResult
+        }
     }
 }

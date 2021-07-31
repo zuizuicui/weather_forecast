@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weather.common.ui.CommonViewModel
-import com.example.weather.common.ui.CommonViewState
+import com.example.weather.common.ui.CommonViewState.*
+import com.example.weather.common.ui.ErrorEvent
+import com.example.weather.domain.entity.exception.CityNotFoundException
+import com.example.weather.domain.entity.exception.InvalidInputException
 import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
 import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
-import com.example.weather.domain.entity.exception.FailRequestException
 import com.example.weather.domain.interaction.searchweather.WeatherResultItem
 import com.example.weather.weatherforecast.ui.util.dateFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -42,14 +43,21 @@ class SearchWeatherViewModel @Inject constructor (
 
     fun searchWeather(keySearch: String) = viewModelScope.launch {
         try {
-            _viewState.value = CommonViewState.LOADING
+            _viewState.value = LOADING
             _weatherInfo.value = searchWeatherInfoUseCase(keySearch).map { toWeatherModelView(it) }
-            _viewState.value = CommonViewState.HAS_RESULT
-        } catch (e: FailRequestException) {
-            _viewState.value = CommonViewState.NO_RESULT
+            _viewState.value = HAS_RESULT
+        } catch (e: InvalidInputException) {
+            _viewState.value = SearchKeyInvalid()
+        } catch (e: CityNotFoundException) {
+            _viewState.value = NO_RESULT_RESPONSE
         } catch (e: Exception) {
-            e.printStackTrace()
-            _viewState.value = CommonViewState.ERROR
+            _viewState.value = handleCommonError(e)
+        }
+    }
+
+    class SearchKeyInvalid: ErrorEvent {
+        override fun getErrorResource(): Int {
+            TODO("Not yet implemented")
         }
     }
 

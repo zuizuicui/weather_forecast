@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:isGone="@{hasWeatherInfo != CommonViewState.NO_RESULT}"
+                app:isGone="@{hasWeatherInfo != CommonViewState.NO_RESULT_RESPONSE}"
                 android:gravity="center"
                 android:text="@string/search_weather_message_no_result"
                 tools:visibility="visible" />

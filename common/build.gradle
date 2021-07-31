@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
+
     implementation deps.kotlin_stdlib
     implementation deps.kotlin.coroutines
 

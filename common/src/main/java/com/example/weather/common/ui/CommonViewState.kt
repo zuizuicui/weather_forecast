@@ -8,11 +8,12 @@ enum class CommonViewState : ViewState {
     LOADING,
     EMPTY,
     HAS_RESULT,
-    NO_RESULT,
-    ERROR
+    NO_RESULT_RESPONSE,
+    NETWORK_ERROR,
+    UN_KNOW_ERROR
 }
 
-interface ErrorEvent {
+interface ErrorEvent : ViewState {
     @StringRes
     fun getErrorResource(): Int
 }
