@@ -1,17 +1,26 @@
 package com.example.weather.weatherforecast.ui.searchweather
 
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
+import com.example.weather.common.ui.CommonViewState
+import com.example.weather.common.ui.ViewState
 import com.example.weather.weatherforecast.R
 import com.example.weather.weatherforecast.WeatherForecastActivity
+import com.example.weather.weatherforecast.mock.MockSearchWeatherViewModel.createWeatherModel
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
+import org.hamcrest.Matchers.not
+import org.junit.Assert
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,13 +31,95 @@ class SearchWeatherFragmentTest {
     var hiltRule = HiltAndroidRule(this)
 
     @BindValue
-    val mockMyViewModel= mockk<SearchWeatherViewModel>(relaxed = true)
+    val viewModel = mockk<SearchWeatherViewModel>(relaxed = true)
+
+    private lateinit var minSearchKeyLength: MutableLiveData<Int>
+    private lateinit var weatherElements: MutableLiveData<List<WeatherModel>>
+    private lateinit var viewState: MutableLiveData<ViewState>
+
+    @Before
+    fun setup() {
+        minSearchKeyLength = MutableLiveData(3)
+        weatherElements = MutableLiveData<List<WeatherModel>>(listOf())
+        viewState = MutableLiveData<ViewState>(CommonViewState.EMPTY)
+
+        every { viewModel.minSearchKeyLength } returns minSearchKeyLength
+        every { viewModel.weatherElements } returns weatherElements
+        every { viewModel.viewState } returns viewState
+    }
 
     @Test
     fun showUi() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
-        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText("hanoi"))
+
+        onView(withId(R.id.et_search_input)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_get_weather)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_get_weather)).check(matches(isNotEnabled()))
+        onView(withId(R.id.empty_page)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun inputKeySearch_buttonNotShow() {
+        ActivityScenario.launch(WeatherForecastActivity::class.java)
+
+        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText("ha"))
+        onView(withId(R.id.btn_get_weather)).check(matches(isNotEnabled()))
+    }
+
+
+    @Test
+    fun inputKeySearch_buttonShow() {
+        ActivityScenario.launch(WeatherForecastActivity::class.java)
+
+        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText("han"))
+        onView(withId(R.id.btn_get_weather)).check(matches(isEnabled()))
+    }
+
+    @Test
+    fun searchWeather_performClick() {
+        ActivityScenario.launch(WeatherForecastActivity::class.java)
+
+        val searchKey = "hanoi"
+
+        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText(searchKey))
         onView(withId(R.id.btn_get_weather)).perform(ViewActions.click())
+
+        verify { viewModel.searchWeather(searchKey) }
+    }
+
+    @Test
+    fun showLoading() {
+        every { viewModel.viewState } returns MutableLiveData(CommonViewState.LOADING)
+
+        ActivityScenario.launch(WeatherForecastActivity::class.java)
+
         onView(withId(R.id.loading)).check(matches(isDisplayed()))
+    }
+
+
+    @Test
+    fun showNoResponse() {
+        every { viewModel.viewState } returns MutableLiveData(CommonViewState.NO_RESULT_RESPONSE)
+
+        ActivityScenario.launch(WeatherForecastActivity::class.java)
+
+        onView(withId(R.id.loading)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.no_result_page)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun showList() {
+        every { viewModel.weatherElements } returns MutableLiveData(listOf(createWeatherModel()))
+        every { viewModel.viewState } returns MutableLiveData(CommonViewState.HAS_RESULT)
+
+        val activityScenario = ActivityScenario.launch(WeatherForecastActivity::class.java)
+
+        onView(withId(R.id.loading)).check(matches(not(isDisplayed())))
+
+        activityScenario.onActivity { activity ->
+            // Disable animations in RecyclerView
+            val itemShowing = (activity.findViewById<RecyclerView>(R.id.weatherList)).adapter?.itemCount
+            Assert.assertEquals(1, itemShowing)
+        }
     }
 }

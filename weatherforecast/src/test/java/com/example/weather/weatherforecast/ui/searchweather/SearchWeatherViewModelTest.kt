@@ -74,7 +74,7 @@ class SearchWeatherViewModelTest {
                 it.onChanged(CommonViewState.HAS_RESULT)
             }
 
-            val weatherModel = viewModel.weatherElement.getOrAwaitValue()
+            val weatherModel = viewModel.weatherElements.getOrAwaitValue()
             Assert.assertEquals (expectedModel, weatherModel)
         }
     }
@@ -98,7 +98,7 @@ class SearchWeatherViewModelTest {
                 it.onChanged(CommonViewState.UN_KNOW_ERROR)
             }
 
-            val weatherModel = viewModel.weatherElement.getOrAwaitValue()
+            val weatherModel = viewModel.weatherElements.getOrAwaitValue()
             Assert.assertEquals (expectedModel, weatherModel)
         }
     }
@@ -122,7 +122,7 @@ class SearchWeatherViewModelTest {
                 it.onChanged(SearchWeatherViewModel.SearchKeyInvalid())
             }
 
-            val weatherModel = viewModel.weatherElement.getOrAwaitValue()
+            val weatherModel = viewModel.weatherElements.getOrAwaitValue()
             Assert.assertEquals (expectedModel, weatherModel)
         }
     }
@@ -146,7 +146,7 @@ class SearchWeatherViewModelTest {
                 it.onChanged(CommonViewState.NO_RESULT_RESPONSE)
             }
 
-            val weatherModel = viewModel.weatherElement.getOrAwaitValue()
+            val weatherModel = viewModel.weatherElements.getOrAwaitValue()
             Assert.assertEquals (expectedModel, weatherModel)
         }
     }
@@ -171,7 +171,7 @@ class SearchWeatherViewModelTest {
                 it.onChanged(CommonViewState.UN_KNOW_ERROR)
             }
 
-            val weatherModel = viewModel.weatherElement.getOrAwaitValue()
+            val weatherModel = viewModel.weatherElements.getOrAwaitValue()
             Assert.assertEquals (expectedModel, weatherModel)
         }
     }

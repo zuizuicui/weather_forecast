@@ -52,7 +52,7 @@ class SearchWeatherFragment : CommonFragment() {
     }
 
     private fun subscribeUi(adapter: SearchWeatherAdapter, binding: SearchWeatherFragmentBinding) {
-        viewModel.weatherElement.observe(viewLifecycleOwner) { result ->
+        viewModel.weatherElements.observe(viewLifecycleOwner) { result ->
             adapter.submitList(result)
         }
 
