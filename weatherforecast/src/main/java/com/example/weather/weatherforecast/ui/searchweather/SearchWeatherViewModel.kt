@@ -43,22 +43,20 @@ class SearchWeatherViewModel @Inject constructor (
 
     fun searchWeather(keySearch: String) = viewModelScope.launch {
         try {
-            _viewState.value = LOADING
+            setViewState(LOADING)
             _weatherInfo.value = searchWeatherInfoUseCase(keySearch).map { toWeatherModelView(it) }
-            _viewState.value = HAS_RESULT
+            setViewState(HAS_RESULT)
         } catch (e: InvalidInputException) {
-            _viewState.value = SearchKeyInvalid()
+            setViewState(SearchKeyInvalid())
         } catch (e: CityNotFoundException) {
-            _viewState.value = NO_RESULT_RESPONSE
+            setViewState(NO_RESULT_RESPONSE)
         } catch (e: Exception) {
-            _viewState.value = handleCommonError(e)
+            setViewState(handleCommonError(e))
         }
     }
 
-    class SearchKeyInvalid: ErrorEvent {
-        override fun getErrorResource(): Int {
-            TODO("Not yet implemented")
-        }
+    data class SearchKeyInvalid(private val errorResource: Int = 1) : ErrorEvent {
+        override fun getErrorResource() = errorResource
     }
 
     private fun toWeatherModelView(result: WeatherResultItem) : WeatherModel {

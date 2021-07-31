@@ -119,7 +119,7 @@ class SearchWeatherViewModelTest {
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)
                 it.onChanged(CommonViewState.LOADING)
-                it.onChanged(CommonViewState.UN_KNOW_ERROR)
+                it.onChanged(SearchWeatherViewModel.SearchKeyInvalid())
             }
 
             val weatherModel = viewModel.weatherElement.getOrAwaitValue()
@@ -143,7 +143,7 @@ class SearchWeatherViewModelTest {
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)
                 it.onChanged(CommonViewState.LOADING)
-                it.onChanged(CommonViewState.UN_KNOW_ERROR)
+                it.onChanged(CommonViewState.NO_RESULT_RESPONSE)
             }
 
             val weatherModel = viewModel.weatherElement.getOrAwaitValue()

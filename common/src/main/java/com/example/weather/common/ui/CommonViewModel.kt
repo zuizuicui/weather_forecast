@@ -7,7 +7,10 @@ import com.example.weather.domain.entity.exception.NetworkErrorException
 import java.lang.Exception
 
 abstract class CommonViewModel : ViewModel() {
-    protected val _viewState = MutableLiveData<ViewState>(CommonViewState.EMPTY)
+    private val _viewState = MutableLiveData<ViewState>(CommonViewState.EMPTY)
+    protected fun setViewState(state: ViewState) {
+        _viewState.value = state
+    }
     val viewState : LiveData<ViewState> = _viewState
 
     fun handleCommonError(e: Exception): ViewState {
