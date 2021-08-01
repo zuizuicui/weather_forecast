@@ -13,17 +13,17 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class SearchWeatherInfoUseCase @Inject constructor (
+class SearchWeatherUseCase @Inject constructor (
     private val weatherRepository: WeatherRepository,
     private val dispatchers: DomainDispatchers
 ) :SuspendUseCase<String, List<WeatherResultItem>> {
 
-    override suspend operator fun invoke(keySearch: String): List<WeatherResultItem> = withContext(dispatchers.default) {
-        if (keySearch.length < LengthSearchKeyRule.searchWeatherMinLength) {
+    override suspend operator fun invoke(searchKey: String): List<WeatherResultItem> = withContext(dispatchers.default) {
+        if (searchKey.length < LengthSearchKeyRule.searchWeatherMinLength) {
             throw InvalidInputException()
         }
 
-        val weatherElementList = weatherRepository.searchWeather(keySearch)
+        val weatherElementList = weatherRepository.searchWeather(searchKey)
 
         return@withContext weatherElementList.map {
             ensureActive()

@@ -5,12 +5,12 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class GetKeySearchLengthUseCaseTest {
+class GetSearchKeyLengthUseCaseTest {
     private val testDispatcher = TestCoroutineDispatcher()
 
     @Test
-    fun testGetLengthKeySearch_shouldReturn3() {
-        val sut = GetKeySearchLengthUseCase()
+    fun testGetLengthSearchKey_shouldReturn3() {
+        val sut = GetSearchKeyLengthUseCase()
         testDispatcher.runBlockingTest {
             assertEquals(3, sut())
         }

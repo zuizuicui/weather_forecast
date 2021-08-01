@@ -9,8 +9,8 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.example.weather.domain.entity.exception.CityNotFoundException
-import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
-import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
+import com.example.weather.domain.interaction.searchweather.GetSearchKeyLengthUseCase
+import com.example.weather.domain.interaction.searchweather.SearchWeatherUseCase
 import com.example.weather.weatherforecast.R
 import com.example.weather.weatherforecast.WeatherForecastActivity
 import com.example.weather.weatherforecast.mock.MockSearchWeather
@@ -31,14 +31,14 @@ class SearchWeatherFragmentIntegrationTest {
     var hiltRule = HiltAndroidRule(this)
 
     @BindValue
-    val getKeySearchLengthUseCase = mockk<GetKeySearchLengthUseCase>()
+    val getSearchKeyLengthUseCase = mockk<GetSearchKeyLengthUseCase>()
 
     @BindValue
-    val searchWeatherInfoUseCase = mockk<SearchWeatherInfoUseCase>()
+    val searchWeatherUseCase = mockk<SearchWeatherUseCase>()
 
     @Before
     fun setup () {
-        coEvery { getKeySearchLengthUseCase() } returns 3
+        coEvery { getSearchKeyLengthUseCase() } returns 3
     }
 
     @Test
@@ -58,7 +58,7 @@ class SearchWeatherFragmentIntegrationTest {
     @Test
     fun searchWeather_showNoResultPage() {
         val searchKey = "abnchdv"
-        coEvery { searchWeatherInfoUseCase(searchKey) } throws CityNotFoundException()
+        coEvery { searchWeatherUseCase(searchKey) } throws CityNotFoundException()
 
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
@@ -74,7 +74,7 @@ class SearchWeatherFragmentIntegrationTest {
     @Test
     fun searchWeather_showListWeather() {
         val searchKey = "hanoi"
-        coEvery { searchWeatherInfoUseCase(searchKey) } returns listOf(MockSearchWeather.createWeatherResult())
+        coEvery { searchWeatherUseCase(searchKey) } returns listOf(MockSearchWeather.createWeatherResult())
 
         val activityScenario = ActivityScenario.launch(WeatherForecastActivity::class.java)
 

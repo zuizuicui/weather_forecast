@@ -9,7 +9,7 @@ import com.example.weather.weatherforecast.databinding.ListItemWeatherBinding
 
 class SearchWeatherAdapter : ListAdapter<WeatherModel, RecyclerView.ViewHolder>(WeatherDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return WeatherInfoViewHolder(
+        return WeatherViewHolder(
             ListItemWeatherBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -20,10 +20,10 @@ class SearchWeatherAdapter : ListAdapter<WeatherModel, RecyclerView.ViewHolder>(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val weatherModel = getItem(position)
-        (holder as WeatherInfoViewHolder).bind(weatherModel)
+        (holder as WeatherViewHolder).bind(weatherModel)
     }
 
-    class WeatherInfoViewHolder(
+    class WeatherViewHolder(
         private val binding: ListItemWeatherBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WeatherModel) {

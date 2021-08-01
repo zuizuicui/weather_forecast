@@ -57,7 +57,7 @@ class SearchWeatherFragment : CommonFragment() {
         }
 
         viewModel.viewState.observe(viewLifecycleOwner) {
-            binding.hasWeatherInfo = it
+            binding.hasWeather = it
         }
 
         viewModel.minSearchKeyLength.observe(viewLifecycleOwner) { minSearchKeyLength ->

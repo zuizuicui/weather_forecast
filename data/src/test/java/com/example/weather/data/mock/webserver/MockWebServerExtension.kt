@@ -1,5 +1,6 @@
-package com.example.weather.data
+package com.example.weather.data.mock.webserver
 
+import com.example.weather.data.remote.config.wrapresponse.WrapResponseAdapterFactory
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -35,6 +36,7 @@ internal fun<T> MockWebServer.build(clazz: Class<T>) : T{
         .baseUrl(url("/"))
         .client(client)
         .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .addCallAdapterFactory(WrapResponseAdapterFactory())
         .build()
         .create(clazz)
 }

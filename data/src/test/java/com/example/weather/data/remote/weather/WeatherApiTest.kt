@@ -1,7 +1,7 @@
 package com.example.weather.data.remote.weather
 
-import com.example.weather.data.build
-import com.example.weather.data.enqueueResponse
+import com.example.weather.data.mock.webserver.build
+import com.example.weather.data.mock.webserver.enqueueResponse
 import com.example.weather.data.repository.dispatcher.DataDispatchers
 import com.example.weather.data.repository.WeatherRepositoryImpl
 import com.example.weather.data.repository.converter.WeatherElementConvertImpl

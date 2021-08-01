@@ -10,7 +10,7 @@
         <import type="com.example.weather.common.ui.CommonViewState"/>
 
         <variable
-            name="hasWeatherInfo"
+            name="hasWeather"
             type="ViewState" />
         <variable
             name="searchText"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:isGone="@{hasWeatherInfo != CommonViewState.HAS_RESULT}"
+                app:isGone="@{hasWeather != CommonViewState.HAS_RESULT}"
                 tools:listitem="@layout/list_item_weather" />
 
             <ProgressBar
@@ -61,7 +61,7 @@
                 android:layout_width="@dimen/size_progress_bar"
                 android:layout_height="@dimen/size_progress_bar"
                 android:layout_gravity="center"
-                app:isGone="@{hasWeatherInfo != CommonViewState.LOADING}"
+                app:isGone="@{hasWeather != CommonViewState.LOADING}"
                 tools:visibility="visible" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                app:isGone="@{hasWeatherInfo != CommonViewState.EMPTY}"
+                app:isGone="@{hasWeather != CommonViewState.EMPTY}"
                 android:text="@string/search_weather_message_empty_page"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:isGone="@{hasWeatherInfo != CommonViewState.NO_RESULT_RESPONSE}"
+                app:isGone="@{hasWeather != CommonViewState.NO_RESULT_RESPONSE}"
                 android:gravity="center"
                 android:text="@string/search_weather_message_no_result"
                 tools:visibility="visible" />

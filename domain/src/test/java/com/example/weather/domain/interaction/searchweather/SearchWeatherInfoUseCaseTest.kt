@@ -17,13 +17,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class SearchWeatherInfoUseCaseTest {
+class SearchWeatherUseCaseTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
 
     private val dispatchers = DomainDispatchers(testDispatcher)
 
-    lateinit var searchWeatherInfoUseCase : SearchWeatherInfoUseCase
+    lateinit var searchWeatherUseCase : SearchWeatherUseCase
 
     @After
     fun teardown() {
@@ -34,7 +34,7 @@ class SearchWeatherInfoUseCaseTest {
     fun testSearchWeather_shouldThrowException() {
         val weatherRepository: WeatherRepository = mockk(relaxed = true)
 
-        searchWeatherInfoUseCase = SearchWeatherInfoUseCase(
+        searchWeatherUseCase = SearchWeatherUseCase(
             weatherRepository,
             dispatchers
         )
@@ -42,7 +42,7 @@ class SearchWeatherInfoUseCaseTest {
         val searchKey = "ha"
 
         testDispatcher.runBlockingTest {
-            searchWeatherInfoUseCase(searchKey)
+            searchWeatherUseCase(searchKey)
         }
     }
 
@@ -52,7 +52,7 @@ class SearchWeatherInfoUseCaseTest {
         val weatherElement: List<WeatherElement> = listOf(MockWeatherElement.weatherElement)
         val weatherRepository: WeatherRepository = fakeWeatherRepository(weatherElement)
 
-        searchWeatherInfoUseCase = SearchWeatherInfoUseCase(
+        searchWeatherUseCase = SearchWeatherUseCase(
             weatherRepository,
             dispatchers
         )
@@ -62,7 +62,7 @@ class SearchWeatherInfoUseCaseTest {
         val searchKey = "hanoi"
 
         testDispatcher.runBlockingTest {
-            assertEquals(expectResult, searchWeatherInfoUseCase(searchKey))
+            assertEquals(expectResult, searchWeatherUseCase(searchKey))
             coVerify { weatherRepository.searchWeather(searchKey) }
         }
     }
@@ -73,7 +73,7 @@ class SearchWeatherInfoUseCaseTest {
         val weatherElement: List<WeatherElement> = listOf(MockWeatherElement.nullObject)
         val weatherRepository: WeatherRepository = fakeWeatherRepository(weatherElement)
 
-        searchWeatherInfoUseCase = SearchWeatherInfoUseCase(
+        searchWeatherUseCase = SearchWeatherUseCase(
             weatherRepository,
             dispatchers
         )
@@ -83,7 +83,7 @@ class SearchWeatherInfoUseCaseTest {
         val searchKey = "hanoi"
 
         testDispatcher.runBlockingTest {
-            assertEquals(expectResult, searchWeatherInfoUseCase(searchKey))
+            assertEquals(expectResult, searchWeatherUseCase(searchKey))
             coVerify { weatherRepository.searchWeather(searchKey) }
         }
     }

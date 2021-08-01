@@ -4,14 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weather.common.ui.CommonViewModel
-import com.example.weather.common.ui.CommonViewState
 import com.example.weather.common.ui.CommonViewState.*
 import com.example.weather.common.ui.ErrorEvent
-import com.example.weather.common.ui.ViewState
 import com.example.weather.domain.entity.exception.CityNotFoundException
 import com.example.weather.domain.entity.exception.InvalidInputException
-import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
-import com.example.weather.domain.interaction.searchweather.SearchWeatherInfoUseCase
+import com.example.weather.domain.interaction.searchweather.GetSearchKeyLengthUseCase
+import com.example.weather.domain.interaction.searchweather.SearchWeatherUseCase
 import com.example.weather.domain.interaction.searchweather.WeatherResultItem
 import com.example.weather.weatherforecast.ui.util.dateFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +19,8 @@ import kotlin.math.roundToInt
 
 @HiltViewModel
 class SearchWeatherViewModel @Inject constructor (
-    val getKeySearchLengthUseCase: GetKeySearchLengthUseCase,
-    val searchWeatherInfoUseCase: SearchWeatherInfoUseCase
+    val getSearchKeyLengthUseCase: GetSearchKeyLengthUseCase,
+    val searchWeatherUseCase: SearchWeatherUseCase
 ) : CommonViewModel() {
 
     private var _minSearchKeyLength = MutableLiveData(0)
@@ -37,16 +35,16 @@ class SearchWeatherViewModel @Inject constructor (
 
     private fun getMinSearchKeyLength() = viewModelScope.launch {
         try {
-            _minSearchKeyLength.value = getKeySearchLengthUseCase()
+            _minSearchKeyLength.value = getSearchKeyLengthUseCase()
         } catch (e: Exception) {
             // will not happen
         }
     }
 
-    fun searchWeather(keySearch: String) = viewModelScope.launch {
+    fun searchWeather(searchKey: String) = viewModelScope.launch {
         try {
             setViewState(LOADING)
-            _weatherElements.value = searchWeatherInfoUseCase(keySearch).map { toWeatherModelView(it) }
+            _weatherElements.value = searchWeatherUseCase(searchKey).map { toWeatherModelView(it) }
             setViewState(HAS_RESULT)
         } catch (e: InvalidInputException) {
             setViewState(SearchKeyInvalid())

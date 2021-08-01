@@ -5,7 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.weather.common.ui.CommonViewState
 import com.example.weather.domain.entity.exception.CityNotFoundException
 import com.example.weather.domain.entity.exception.InvalidInputException
-import com.example.weather.domain.interaction.searchweather.GetKeySearchLengthUseCase
+import com.example.weather.domain.interaction.searchweather.GetSearchKeyLengthUseCase
 import com.example.weather.weatherforecast.mock.MockSearchUseCase.mockSearchUseCase
 import com.example.weather.weatherforecast.mock.MockWeatherModel
 import com.example.weather.weatherforecast.util.MainCoroutineRule
@@ -34,17 +34,17 @@ class SearchWeatherViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    private val getKeySearchLengthUseCase: GetKeySearchLengthUseCase = mockk()
+    private val getSearchKeyLengthUseCase: GetSearchKeyLengthUseCase = mockk()
     private lateinit var viewModel :SearchWeatherViewModel
 
     @Before
     fun setup() {
-        coEvery { getKeySearchLengthUseCase() } returns 3
+        coEvery { getSearchKeyLengthUseCase() } returns 3
     }
 
     @Test
-    fun getKeySearchLengthUseCase_return3() {
-        viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, mockk())
+    fun getSearchKeyLengthUseCase_return3() {
+        viewModel = SearchWeatherViewModel(getSearchKeyLengthUseCase, mockk())
         Assert.assertEquals (3, viewModel.minSearchKeyLength.getOrAwaitValue())
         Assert.assertEquals (CommonViewState.EMPTY, viewModel.viewState.getOrAwaitValue())
     }
@@ -55,18 +55,18 @@ class SearchWeatherViewModelTest {
             MockWeatherModel.createWeatherResult(),
             MockWeatherModel.createWeatherResult()
         ))
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
 
         val expectedModel = listOf(
             MockWeatherModel.createWeatherModel(),
             MockWeatherModel.createWeatherModel()
         )
 
-        viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, searchWeatherUseCase)
+        viewModel = SearchWeatherViewModel(getSearchKeyLengthUseCase, searchWeatherUseCase)
 
         viewModel.viewState.observeForTesting {
-            viewModel.searchWeather(keySearch)
-            coVerify { searchWeatherUseCase(keySearch) }
+            viewModel.searchWeather(searchKey)
+            coVerify { searchWeatherUseCase(searchKey) }
 
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)
@@ -82,15 +82,15 @@ class SearchWeatherViewModelTest {
     @Test
     fun searchWeather_networkException() {
         val searchWeatherUseCase = mockSearchUseCase( exception =  NetworkErrorException())
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
 
         val expectedModel = emptyList<WeatherModel>()
 
-        viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, searchWeatherUseCase)
+        viewModel = SearchWeatherViewModel(getSearchKeyLengthUseCase, searchWeatherUseCase)
 
         viewModel.viewState.observeForTesting {
-            viewModel.searchWeather(keySearch)
-            coVerify { searchWeatherUseCase(keySearch) }
+            viewModel.searchWeather(searchKey)
+            coVerify { searchWeatherUseCase(searchKey) }
 
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)
@@ -106,15 +106,15 @@ class SearchWeatherViewModelTest {
     @Test
     fun searchWeather_invalidInputException() {
         val searchWeatherUseCase = mockSearchUseCase( exception =  InvalidInputException())
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
 
         val expectedModel = emptyList<WeatherModel>()
 
-        viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, searchWeatherUseCase)
+        viewModel = SearchWeatherViewModel(getSearchKeyLengthUseCase, searchWeatherUseCase)
 
         viewModel.viewState.observeForTesting {
-            viewModel.searchWeather(keySearch)
-            coVerify { searchWeatherUseCase(keySearch) }
+            viewModel.searchWeather(searchKey)
+            coVerify { searchWeatherUseCase(searchKey) }
 
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)
@@ -130,15 +130,15 @@ class SearchWeatherViewModelTest {
     @Test
     fun searchWeather_cityNotFoundException() {
         val searchWeatherUseCase = mockSearchUseCase( exception =  CityNotFoundException())
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
 
         val expectedModel = emptyList<WeatherModel>()
 
-        viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, searchWeatherUseCase)
+        viewModel = SearchWeatherViewModel(getSearchKeyLengthUseCase, searchWeatherUseCase)
 
         viewModel.viewState.observeForTesting {
-            viewModel.searchWeather(keySearch)
-            coVerify { searchWeatherUseCase(keySearch) }
+            viewModel.searchWeather(searchKey)
+            coVerify { searchWeatherUseCase(searchKey) }
 
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)
@@ -155,15 +155,15 @@ class SearchWeatherViewModelTest {
     @Test
     fun searchWeather_unKnowException() {
         val searchWeatherUseCase = mockSearchUseCase( exception =  Exception())
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
 
         val expectedModel = emptyList<WeatherModel>()
 
-        viewModel = SearchWeatherViewModel(getKeySearchLengthUseCase, searchWeatherUseCase)
+        viewModel = SearchWeatherViewModel(getSearchKeyLengthUseCase, searchWeatherUseCase)
 
         viewModel.viewState.observeForTesting {
-            viewModel.searchWeather(keySearch)
-            coVerify { searchWeatherUseCase(keySearch) }
+            viewModel.searchWeather(searchKey)
+            coVerify { searchWeatherUseCase(searchKey) }
 
             verifySequence {
                 it.onChanged(CommonViewState.EMPTY)

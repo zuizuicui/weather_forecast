@@ -29,7 +29,7 @@ class WeatherRepositoryImplTest {
 
     @Test
     fun searchWeather_shouldReturnSuccess() {
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
 
         val weatherApiSuccess : WeatherApi = fakeWeatherApiSearch(weatherListDto = weatherListDto)
 
@@ -40,8 +40,8 @@ class WeatherRepositoryImplTest {
         )
 
         testDispatcher.runBlockingTest {
-            val result = weatherRepository.searchWeather(keySearch)
-            coVerify { weatherApiSuccess.searchWeatherInfo(keySearch) }
+            val result = weatherRepository.searchWeather(searchKey)
+            coVerify { weatherApiSuccess.searchWeather(searchKey) }
             coVerify { weatherElementConvert.convertToListModel(weatherListDto) }
             assertEquals(weatherList, result)
         }
@@ -49,7 +49,7 @@ class WeatherRepositoryImplTest {
 
     @Test (expected = CityNotFoundException::class)
     fun searchWeather_shouldReturnFail() {
-        val keySearch = "hanoi"
+        val searchKey = "hanoi"
         val weatherApiFail : WeatherApi = fakeWeatherApiSearch(fail = true)
 
         weatherRepository = WeatherRepositoryImpl(
@@ -59,7 +59,7 @@ class WeatherRepositoryImplTest {
         )
 
         testDispatcher.runBlockingTest {
-            weatherRepository.searchWeather(keySearch)
+            weatherRepository.searchWeather(searchKey)
         }
     }
 }

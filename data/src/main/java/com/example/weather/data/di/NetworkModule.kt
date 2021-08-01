@@ -3,6 +3,7 @@ package com.example.weather.data.di
 import android.content.Context
 import com.example.weather.data.remote.config.CacheControlInterceptor
 import com.example.weather.data.remote.config.RetrofitConfig
+import com.example.weather.data.remote.config.wrapresponse.WrapResponseAdapterFactory
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -13,6 +14,7 @@ import okhttp3.Cache
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -22,11 +24,16 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    internal fun provideRetrofit(client: OkHttpClient, factory: GsonConverterFactory): Retrofit =
+    internal fun provideRetrofit(
+        client: OkHttpClient,
+        factory: GsonConverterFactory,
+        wrapResponseFactory: CallAdapter.Factory
+    ): Retrofit =
         Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org")
             .client(client)
             .addConverterFactory(factory)
+            .addCallAdapterFactory(wrapResponseFactory)
             .build()
 
     @Provides
@@ -43,6 +50,9 @@ class NetworkModule {
             .addInterceptor(httpLoggingInterceptor)
             .build()
     }
+
+    @Provides
+    internal fun provideAdapterFactory() : CallAdapter.Factory = WrapResponseAdapterFactory()
 
     @Provides
     internal fun provideCache(@ApplicationContext context: Context) =

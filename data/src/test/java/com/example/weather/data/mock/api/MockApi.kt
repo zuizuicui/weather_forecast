@@ -1,5 +1,6 @@
 package com.example.weather.data.mock.api
 
+import com.example.weather.data.remote.WrapResponse
 import com.example.weather.data.remote.SearchWeatherResponse
 import com.example.weather.data.remote.WeatherElementDto
 import com.example.weather.data.remote.weather.WeatherApi
@@ -17,17 +18,17 @@ fun fakeWeatherApiSearch(
     fail: Boolean = false
 ) = mockk<WeatherApi>().apply {
     if (exception != null) {
-        coEvery { searchWeatherInfo(any(), any(), any()) } throws exception
+        coEvery { searchWeather(any(), any(), any()) } throws exception
         return@apply
     }
     if (fail) {
-        coEvery { searchWeatherInfo(any(), any(), any()) } throws createHttpException()
+        coEvery { searchWeather(any(), any(), any()) } throws createHttpException()
         return@apply
     }
     every { searchWeatherResponse.isSuccess()} returns (true)
     every { searchWeatherResponse.code} returns "200"
     every { searchWeatherResponse.list} returns weatherListDto
-    coEvery { searchWeatherInfo(any(), any(), any()) } returns searchWeatherResponse
+    coEvery { searchWeather(any(), any(), any()) } returns WrapResponse.Success(searchWeatherResponse)
 }
 
 fun createHttpException(): HttpException {

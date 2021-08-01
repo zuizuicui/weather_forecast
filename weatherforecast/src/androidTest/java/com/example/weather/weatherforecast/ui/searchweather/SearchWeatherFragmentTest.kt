@@ -44,7 +44,7 @@ class SearchWeatherFragmentTest {
     }
 
     @Test
-    fun inputKeySearch_buttonNotShow() {
+    fun inputSearchKey_buttonNotShow() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
         onView(withId(R.id.et_search_input)).perform(typeText("ha"))
@@ -53,7 +53,7 @@ class SearchWeatherFragmentTest {
 
 
     @Test
-    fun inputKeySearch_buttonShow() {
+    fun inputSearchKey_buttonShow() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
         onView(withId(R.id.et_search_input)).perform(typeText("han"))
