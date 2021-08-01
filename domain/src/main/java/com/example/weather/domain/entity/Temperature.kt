@@ -11,16 +11,16 @@ data class Temperature(
     val eve: Double,
     val morn: Double
 ) {
-    enum class TemperatureUnit(val conversionFactor: Double) {
-        KELVIN(0.0),
-        CELSIUS(- 272.15),
-        FAHRENHEIT(-457.87)
+    enum class TemperatureUnit(val calculate : (Double) -> Double) {
+        KELVIN(calculate = {it}),
+        CELSIUS(calculate = {it - 273.15}),
+        FAHRENHEIT(calculate = {(it - 273.15)* 1.8000 + 32.00})
     }
 
     fun average(unit: TemperatureUnit = KELVIN) : Double {
         return listOf(day, min, max, night, eve, morn)
             .average()
-            .plus(unit.conversionFactor)
+            .let { unit.calculate(it) }
             .round(decimals = 2)
     }
 

@@ -20,18 +20,18 @@ internal class WrapResponseCall<S : Any> (
         }
     }
 
-    override fun adaptResponseError(error: ResponseBody?, message: String): Response<WrapResponse<S>> {
-        val errorBody = when {
-            error == null -> null
-            error.contentLength() == 0L -> null
+    override fun adaptResponseError(errorBody: ResponseBody?, message: String): Response<WrapResponse<S>> {
+        val error = when {
+            errorBody == null -> null
+            errorBody.contentLength() == 0L -> null
             else -> try {
-                errorConverter.convert(error)
+                errorConverter.convert(errorBody)
             } catch (ex: Exception) {
                 null
             }
         }
-        return if (errorBody != null) {
-            Response.success(errorBody)
+        return if (error != null) {
+            Response.success(error)
         } else {
             Response.success(WrapResponse.UnknownError(Exception(message)))
         }

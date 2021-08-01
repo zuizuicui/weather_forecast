@@ -2,7 +2,6 @@ package com.example.weather.domain.entity
 
 import com.example.weather.domain.entity.Temperature.TemperatureUnit.*
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 
 class CalculateAverageTemperatureTest {
@@ -12,7 +11,7 @@ class CalculateAverageTemperatureTest {
         val temperature = createTemperature()
         val averageTemperatureInCelsius =
             temperature.average(CELSIUS)
-        Assert.assertEquals(29.25, averageTemperatureInCelsius, 0.01)
+        Assert.assertEquals(28.25, averageTemperatureInCelsius, 0.01)
     }
 
     @Test
@@ -20,14 +19,14 @@ class CalculateAverageTemperatureTest {
         val temperature = createTemperature()
         val averageTemperatureInKelvin =
             temperature.average(KELVIN)
-        Assert.assertEquals(29.25, averageTemperatureInKelvin, 0.01)
+        Assert.assertEquals(301.4, averageTemperatureInKelvin, 0.01)
     }
 
     @Test
     fun testCalculateAverageTemperature_shouldValueInFahrenheit() {
         val temperature = createTemperature()
         val averageTemperatureInFahrenheit = temperature.average(FAHRENHEIT)
-        Assert.assertEquals(29.25, averageTemperatureInFahrenheit, 0.01)
+        Assert.assertEquals(82.86, averageTemperatureInFahrenheit, 0.01)
     }
 
     @Test

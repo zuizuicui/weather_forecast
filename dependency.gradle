@@ -1,0 +1,128 @@
+ext.kotlin_version = "1.5.21"
+
+ext.versions = [
+        dagger     : '2.38',
+
+        converter_gson: '2.9.0',
+        retrofit: '2.9.0',
+        okhttp: '5.0.0-alpha.2',
+
+        androidx_junit: '1.1.3',
+        espresso_core: '3.4.0',
+        espresso_core_testing: '2.1.0',
+
+        kotlin_test: '1.5.1',
+        mockk: '1.11.0',
+        junit: '4.13.2',
+
+        core_ktx:'1.6.0',
+        fragment_ktx:'1.3.6',
+        appcompat: '1.3.1',
+        material:'1.4.0',
+        contraintlayout:'2.0.4',
+
+        lifecycle: '2.3.1',
+
+        coroutines: '1.5.1-native-mt',
+
+        mapstruct: '1.5.0.Beta1',
+        mockwebserver: '4.7.2',
+
+        hilt: '2.38.1'
+]
+
+ext.deps = [
+        'kotlin_stdlib' : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+
+        'kotlin': [
+                'coroutines': "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+        ],
+
+        'dagger'    : [
+                'runtime' : "com.google.dagger:dagger:${versions.dagger}",
+                'compiler': "com.google.dagger:dagger-compiler:${versions.dagger}",
+        ],
+        'hilt'    : [
+                'runtime': "com.google.dagger:hilt-android:${versions.hilt}",
+                'compiler': "com.google.dagger:hilt-android-compiler:${versions.hilt}",
+                'test_runtime': "com.google.dagger:hilt-android-testing:${versions.hilt}",
+                'test_compiler': "com.google.dagger:hilt-android-compiler:${versions.hilt}"
+        ],
+        'network'   : [
+                'retrofit_gson' : "com.squareup.retrofit2:converter-gson:${versions.converter_gson}",
+                'okhttp' : "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
+                'retrofit' : "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+        ],
+        'android_test' : [
+                'junit': "androidx.test.ext:junit:${versions.androidx_junit}",
+                'espresso_core': "androidx.test.espresso:espresso-core:${versions.espresso_core}",
+                'espresso_contrib': "androidx.test.espresso:espresso-contrib:${versions.espresso_core}",
+                'espresso_intents': "androidx.test.espresso:espresso-intents:${versions.espresso_core}",
+                'mockk': "io.mockk:mockk-android:${versions.mockk}"
+
+        ],
+        'unit_test' : [
+                'junit': "junit:junit:${versions.junit}",
+                'kotlinx_coroutines_test': "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.kotlin_test}",
+                'mockk': "io.mockk:mockk:${versions.mockk}",
+                'mockwebserver': "com.squareup.okhttp3:mockwebserver:${versions.mockwebserver}",
+                'espresso_core_testing': "androidx.arch.core:core-testing:${versions.espresso_core_testing}",
+        ],
+        'androidx' : [
+                'core': "androidx.core:core-ktx:${versions.core_ktx}",
+                'fragment_ktx': "androidx.fragment:fragment-ktx:${versions.fragment_ktx}",
+                'appcompat': "androidx.appcompat:appcompat:${versions.appcompat}",
+                'material': "com.google.android.material:material:${versions.material}",
+                'constraintlayout': "androidx.constraintlayout:constraintlayout:${versions.contraintlayout}"
+        ],
+
+        'lifecycle' : [
+                'livedata': "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}",
+                'viewmodel': "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+        ],
+        'mapstruct'    : [
+                'runtime' : "org.mapstruct:mapstruct:${versions.mapstruct}",
+                'compiler': "org.mapstruct:mapstruct-processor:${versions.mapstruct}",
+        ]
+]
+
+ext.kaptDagger = [
+        deps.dagger.compiler
+]
+
+ext.implementationDagger = [
+        deps.dagger.runtime
+]
+
+ext.kaptHilt = [
+        deps.hilt.compiler
+]
+
+ext.implementationHilt = [
+        deps.hilt.runtime
+]
+
+ext.retrofit = [
+        deps.network.retrofit,
+        deps.network.retrofit_gson,
+        deps.network.okhttp
+]
+
+ext.android_test = [
+        deps.android_test.junit,
+        deps.android_test.espresso_core,
+        deps.android_test.espresso_contrib,
+        deps.android_test.espresso_intents,
+]
+
+ext.unit_test = [
+        deps.unit_test.kotlinx_coroutines_test,
+        deps.unit_test.mockk,
+        deps.unit_test.junit,
+]
+
+ext.androidx_default = [
+        deps.androidx.core,
+        deps.androidx.appcompat,
+        deps.androidx.material,
+]

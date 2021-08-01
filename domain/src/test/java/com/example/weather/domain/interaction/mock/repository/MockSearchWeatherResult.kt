@@ -6,7 +6,7 @@ object MockSearchWeatherResult {
     val searchWeatherResult =
         WeatherResultItem(
             date=1627012800,
-            averageTemp=27.51,
+            averageTemp=26.51,
             pressure=1008,
             humidity=75,
             description="moderate rain"
