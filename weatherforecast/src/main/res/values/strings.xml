@@ -7,4 +7,5 @@
     <string name="item_weather_humidity">Average temperature: %s%%</string>
     <string name="search_weather_message_empty_page">Please enter your key search and \n search for weathers.</string>
     <string name="search_weather_message_no_result">Your key search have no result,\n please change a new one and try again.</string>
+    <string name="search_weather_hint_search_input">Enter city name</string>
 </resources>

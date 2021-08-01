@@ -31,7 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="@={searchText}"/>
+            android:text="@={searchText}"
+            android:hint="@string/search_weather_hint_search_input"
+            android:importantForAutofill="no"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/btn_get_weather"

@@ -10,8 +10,8 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.weather.common.ui.CommonViewState
 import com.example.weather.weatherforecast.R
 import com.example.weather.weatherforecast.WeatherForecastActivity
-import com.example.weather.weatherforecast.mock.MockSearchWeatherViewModel.createWeatherModel
-import com.example.weather.weatherforecast.mock.MockSearchWeatherViewModel.mockSearchWeatherViewModel
+import com.example.weather.weatherforecast.mock.MockSearchWeather.createWeatherModel
+import com.example.weather.weatherforecast.mock.MockSearchWeather.mockSearchWeatherViewModel
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

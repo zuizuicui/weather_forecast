@@ -14,9 +14,9 @@ import javax.inject.Inject
 
 open class WeatherElementConvertImpl @Inject constructor(private val dispatchers: DataDispatchers) : WeatherElementConvert {
 
-    override suspend fun convertToListModel(list: List<WeatherElementDto>): List<WeatherElement> {
+    override suspend fun convertToListModel(weatherElements: List<WeatherElementDto>): List<WeatherElement> {
         return withContext(dispatchers.default) {
-            return@withContext list.map { it.toWeatherElement() }
+            return@withContext weatherElements.map { it.toWeatherElement() }
         }
     }
 
