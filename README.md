@@ -1,12 +1,13 @@
 # weather_forecast
 
-**Multi model structure**
-https://developer.android.com/training/dependency-injection/dagger-multi-module
+**Multi modeles dialog**
 
-Apply on code:
+<img width="537" alt="Screen Shot 2021-08-01 at 20 52 02" src="https://user-images.githubusercontent.com/6103507/127777888-88651f16-0a41-41c4-8378-a702bb6e39fa.png">
 
-<img width="703" alt="Screen Shot 2021-07-25 at 15 40 51" src="https://user-images.githubusercontent.com/6103507/126893130-8e95e8db-ebcf-4ba6-821b-34d5aa668c6d.png">
 
+**Scenario**
+
+<img width="874" alt="Screen Shot 2021-08-01 at 23 10 09" src="https://user-images.githubusercontent.com/6103507/127777960-a4a83ce4-c98a-4dc3-abbb-b4ae2df53a08.png">
 
 **Clean architect structure**
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
@@ -37,13 +38,20 @@ Applied:
 * Retrofit mock test
 * Data binding https://developer.android.com/topic/libraries/data-binding
 * Kotlin coroutine https://kotlinlang.org/docs/coroutines-overview.html
-* Dagger injection: https://developer.android.com/training/dependency-injection/dagger-android
+* Dagger Hilt injection: https://developer.android.com/training/dependency-injection/hilt-android
 
 **Local Development**
+
+Requirement:
+
+gradle:4.2.2
+
+android studio:4.2.2
 
 Use the gradlew build command or use "Import Project" in Android Studio.
 
 ./gradlew clean build - Build the entire example and execute unit and integration tests plus lint check.
+
 ./gradlew installDebug - Install the debug apk on the current connected device.
 
 
@@ -56,7 +64,7 @@ Use the gradlew build command or use "Import Project" in Android Studio.
 4. UI should be looks like in attachment. 
 
 5. Write Unit Tests 
-
+6. Ui test
 
 7. Exception handling 
 8. Caching handling (retrofit cache)
