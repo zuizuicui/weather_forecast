@@ -1,6 +1,6 @@
 package com.example.weather.data.mock.api
 
-import com.example.weather.data.remote.WrapResponse
+import com.example.weather.data.remote.config.wrapresponse.WrapResponse
 import com.example.weather.data.remote.SearchWeatherResponse
 import com.example.weather.data.remote.WeatherElementDto
 import com.example.weather.data.remote.weather.WeatherApi
@@ -14,15 +14,15 @@ import retrofit2.Response
 fun fakeWeatherApiSearch(
     searchWeatherResponse: SearchWeatherResponse = mockk(),
     weatherListDto: List<WeatherElementDto>? = null,
-    exception: Exception? = null,
-    fail: Boolean = false
+    response: WrapResponse<SearchWeatherResponse>? = null,
+    cityNotFound: Boolean = false
 ) = mockk<WeatherApi>().apply {
-    if (exception != null) {
-        coEvery { searchWeather(any(), any(), any()) } throws exception
+    if (response != null) {
+        coEvery { searchWeather(any(), any(), any()) } returns response
         return@apply
     }
-    if (fail) {
-        coEvery { searchWeather(any(), any(), any()) } throws createHttpException()
+    if (cityNotFound) {
+        coEvery { searchWeather(any(), any(), any()) } returns WrapResponse.ApiError(code = 404, body = "city not found")
         return@apply
     }
     every { searchWeatherResponse.isSuccess()} returns (true)

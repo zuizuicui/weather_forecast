@@ -1,6 +1,5 @@
 package com.example.weather.data.remote.config.wrapresponse
 
-import com.example.weather.data.remote.WrapResponse
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.Timeout

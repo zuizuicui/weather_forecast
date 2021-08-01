@@ -50,7 +50,7 @@ class WeatherRepositoryImplTest {
     @Test (expected = CityNotFoundException::class)
     fun searchWeather_shouldReturnFail() {
         val searchKey = "hanoi"
-        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(fail = true)
+        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(cityNotFound = true)
 
         weatherRepository = WeatherRepositoryImpl(
             weatherApiFail,

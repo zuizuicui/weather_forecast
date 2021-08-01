@@ -1,4 +1,4 @@
-package com.example.weather.data.remote
+package com.example.weather.data.remote.config.wrapresponse
 
 import java.io.IOException
 

@@ -1,6 +1,6 @@
 package com.example.weather.data.repository
 
-import com.example.weather.data.remote.WrapResponse.*
+import com.example.weather.data.remote.config.wrapresponse.WrapResponse.*
 import com.example.weather.data.remote.weather.WeatherApi
 import com.example.weather.data.repository.converter.WeatherElementConvert
 import com.example.weather.data.repository.dispatcher.DataDispatchers
