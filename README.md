@@ -42,6 +42,12 @@ Applied:
 
 **Local Development**
 
+Requirement:
+
+gradle:4.2.2
+
+android studio:4.2.2
+
 Use the gradlew build command or use "Import Project" in Android Studio.
 
 ./gradlew clean build - Build the entire example and execute unit and integration tests plus lint check.
