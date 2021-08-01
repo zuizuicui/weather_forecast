@@ -9,12 +9,6 @@
 
 <img width="874" alt="Screen Shot 2021-08-01 at 23 10 09" src="https://user-images.githubusercontent.com/6103507/127777960-a4a83ce4-c98a-4dc3-abbb-b4ae2df53a08.png">
 
-
-Apply on code:
-
-<img width="703" alt="Screen Shot 2021-07-25 at 15 40 51" src="https://user-images.githubusercontent.com/6103507/126893130-8e95e8db-ebcf-4ba6-821b-34d5aa668c6d.png">
-
-
 **Clean architect structure**
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
