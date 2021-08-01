@@ -31,7 +31,7 @@ class SearchWeatherInfoUseCaseTest {
     }
 
     @Test(expected = InvalidInputException::class)
-    fun testSearchWeather_throwException() {
+    fun testSearchWeather_shouldThrowException() {
         val weatherRepository: WeatherRepository = mockk(relaxed = true)
 
         searchWeatherInfoUseCase = SearchWeatherInfoUseCase(

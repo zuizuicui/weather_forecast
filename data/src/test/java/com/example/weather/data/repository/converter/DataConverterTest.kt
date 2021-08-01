@@ -20,7 +20,7 @@ class DataConverterTest {
     }
 
     @Test
-    fun `test convert weatherElementDto to weather element` () {
+    fun  `test convert WeatherElementDto to WeatherElement` () {
         testDispatcher.runBlockingTest {
             val result =
                 converter.convertToListModel(listOf(MockWeatherElementDto.weatherElementDto))
@@ -29,7 +29,7 @@ class DataConverterTest {
     }
 
     @Test
-    fun `test null_object_nested_field to default` () {
+    fun `test convert WeatherElementDto with null nested field to WeatherElement with default field` () {
         testDispatcher.runBlockingTest {
             val result =
                 converter.convertToListModel(listOf(MockWeatherElementDto.nullObjectWithNestedField))
@@ -38,7 +38,7 @@ class DataConverterTest {
     }
 
     @Test
-    fun `test null_all_field convert to default` () {
+    fun `test convert WeatherElementDto with all null field to WeatherElement with default field` () {
         testDispatcher.runBlockingTest {
             val result = converter.convertToListModel(listOf(MockWeatherElementDto.nullAllField))
             assertNotNull(result)

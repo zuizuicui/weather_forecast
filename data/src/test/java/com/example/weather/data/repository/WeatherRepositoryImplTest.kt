@@ -28,7 +28,7 @@ class WeatherRepositoryImplTest {
     private lateinit var weatherRepository : WeatherRepositoryImpl
 
     @Test
-    fun `test search weather info return success`() {
+    fun searchWeather_shouldReturnSuccess() {
         val keySearch = "hanoi"
 
         val weatherApiSuccess : WeatherApi = fakeWeatherApiSearch(weatherListDto = weatherListDto)
@@ -48,9 +48,9 @@ class WeatherRepositoryImplTest {
     }
 
     @Test (expected = CityNotFoundException::class)
-    fun `test search weather info return fail`() {
+    fun searchWeather_shouldReturnFail() {
         val keySearch = "hanoi"
-        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(responseCode = "500")
+        val weatherApiFail : WeatherApi = fakeWeatherApiSearch(fail = true)
 
         weatherRepository = WeatherRepositoryImpl(
             weatherApiFail,

@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.weather.common.ui.CommonViewState
@@ -32,7 +34,7 @@ class SearchWeatherFragmentTest {
     val viewModel = mockSearchWeatherViewModel()
 
     @Test
-    fun showUi() {
+    fun openScreen_showCorrectUi() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
         onView(withId(R.id.et_search_input)).check(matches(isDisplayed()))
@@ -45,7 +47,7 @@ class SearchWeatherFragmentTest {
     fun inputKeySearch_buttonNotShow() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
-        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText("ha"))
+        onView(withId(R.id.et_search_input)).perform(typeText("ha"))
         onView(withId(R.id.btn_get_weather)).check(matches(isNotEnabled()))
     }
 
@@ -54,24 +56,24 @@ class SearchWeatherFragmentTest {
     fun inputKeySearch_buttonShow() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
-        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText("han"))
+        onView(withId(R.id.et_search_input)).perform(typeText("han"))
         onView(withId(R.id.btn_get_weather)).check(matches(isEnabled()))
     }
 
     @Test
-    fun searchWeather_performClick() {
+    fun searchWeather_triggerSearchWeatherOnViewModel() {
         ActivityScenario.launch(WeatherForecastActivity::class.java)
 
         val searchKey = "hanoi"
 
-        onView(withId(R.id.et_search_input)).perform(ViewActions.typeText(searchKey))
-        onView(withId(R.id.btn_get_weather)).perform(ViewActions.click())
+        onView(withId(R.id.et_search_input)).perform(typeText(searchKey))
+        onView(withId(R.id.btn_get_weather)).perform(click())
 
         verify { viewModel.searchWeather(searchKey) }
     }
 
     @Test
-    fun showLoading() {
+    fun searchWeather_showProgressLoading() {
         every { viewModel.viewState } returns MutableLiveData(CommonViewState.LOADING)
 
         ActivityScenario.launch(WeatherForecastActivity::class.java)
@@ -81,7 +83,7 @@ class SearchWeatherFragmentTest {
 
 
     @Test
-    fun showNoResponse() {
+    fun searchWeather_showNoResultPage() {
         every { viewModel.viewState } returns MutableLiveData(CommonViewState.NO_RESULT_RESPONSE)
 
         ActivityScenario.launch(WeatherForecastActivity::class.java)
@@ -91,7 +93,7 @@ class SearchWeatherFragmentTest {
     }
 
     @Test
-    fun showList() {
+    fun searchWeather_showListOfWeather() {
         every { viewModel.weatherElements } returns MutableLiveData(listOf(createWeatherModel()))
         every { viewModel.viewState } returns MutableLiveData(CommonViewState.HAS_RESULT)
 

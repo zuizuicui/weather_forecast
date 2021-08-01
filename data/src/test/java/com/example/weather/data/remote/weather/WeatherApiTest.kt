@@ -41,7 +41,7 @@ class WeatherApiTest {
     }
 
     @Test
-    fun `should search weather correctly given 200 response`() {
+    fun searchWeather_returnSuccess() {
         mockWebServer.enqueueResponse("weather-info-200.json", 200)
 
         runBlocking {
@@ -52,8 +52,8 @@ class WeatherApiTest {
     }
 
     @Test(expected = CityNotFoundException::class)
-    fun `should search weather given 404 not found response`() {
-        mockWebServer.enqueueResponse("weather-info-404.json", 200)
+    fun searchWeather_returnFail() {
+        mockWebServer.enqueueResponse("weather-info-404.json", 404)
         runBlocking {
             weatherRepository.searchWeather("abc")
         }
