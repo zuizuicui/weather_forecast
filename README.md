@@ -1,6 +1,6 @@
 # weather_forecast
 
-**Component dialog**
+**Multi modeles dialog**
 
 <img width="537" alt="Screen Shot 2021-08-01 at 20 52 02" src="https://user-images.githubusercontent.com/6103507/127777888-88651f16-0a41-41c4-8378-a702bb6e39fa.png">
 
