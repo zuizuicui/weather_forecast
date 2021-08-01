@@ -26,8 +26,8 @@ class SearchWeatherViewModel @Inject constructor (
     private var _minSearchKeyLength = MutableLiveData(0)
     var minSearchKeyLength : LiveData<Int> = _minSearchKeyLength
 
-    private var _weatherElements = MutableLiveData<List<WeatherModel>>(listOf())
-    var weatherElements : LiveData<List<WeatherModel>> = _weatherElements
+    private var _weathers = MutableLiveData<List<WeatherModel>>(listOf())
+    var weathers : LiveData<List<WeatherModel>> = _weathers
 
     init {
         getMinSearchKeyLength()
@@ -44,7 +44,7 @@ class SearchWeatherViewModel @Inject constructor (
     fun searchWeather(searchKey: String) = viewModelScope.launch {
         try {
             setViewState(LOADING)
-            _weatherElements.value = searchWeatherUseCase(searchKey).map { toWeatherModelView(it) }
+            _weathers.value = searchWeatherUseCase(searchKey).map { toWeatherModelView(it) }
             setViewState(HAS_RESULT)
         } catch (e: InvalidInputException) {
             setViewState(SearchKeyInvalid())

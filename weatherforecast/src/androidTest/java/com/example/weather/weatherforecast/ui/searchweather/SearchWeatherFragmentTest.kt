@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -94,7 +93,7 @@ class SearchWeatherFragmentTest {
 
     @Test
     fun searchWeather_showListOfWeather() {
-        every { viewModel.weatherElements } returns MutableLiveData(listOf(createWeatherModel()))
+        every { viewModel.weathers } returns MutableLiveData(listOf(createWeatherModel()))
         every { viewModel.viewState } returns MutableLiveData(CommonViewState.HAS_RESULT)
 
         val activityScenario = ActivityScenario.launch(WeatherForecastActivity::class.java)

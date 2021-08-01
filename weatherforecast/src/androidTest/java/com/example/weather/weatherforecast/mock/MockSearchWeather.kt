@@ -13,11 +13,11 @@ object MockSearchWeather {
 
     fun mockSearchWeatherViewModel() = mockk<SearchWeatherViewModel>(relaxed = true).also {
         val minSearchKeyLength = MutableLiveData(3)
-        val weatherElements = MutableLiveData<List<WeatherModel>>(listOf())
+        val weatherModels = MutableLiveData<List<WeatherModel>>(listOf())
         val viewState = MutableLiveData<ViewState>(CommonViewState.EMPTY)
 
         every { it.minSearchKeyLength } returns minSearchKeyLength
-        every { it.weatherElements } returns weatherElements
+        every { it.weathers } returns weatherModels
         every { it.viewState } returns viewState
     }
 
