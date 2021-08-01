@@ -1,7 +1,12 @@
 # weather_forecast
 
-**Multi model structure**
-https://developer.android.com/training/dependency-injection/dagger-multi-module
+**Component dialog**
+<img width="537" alt="Screen Shot 2021-08-01 at 20 52 02" src="https://user-images.githubusercontent.com/6103507/127777888-88651f16-0a41-41c4-8378-a702bb6e39fa.png">
+
+
+**Scenario**
+<img width="874" alt="Screen Shot 2021-08-01 at 23 10 09" src="https://user-images.githubusercontent.com/6103507/127777960-a4a83ce4-c98a-4dc3-abbb-b4ae2df53a08.png">
+
 
 Apply on code:
 
@@ -37,13 +42,14 @@ Applied:
 * Retrofit mock test
 * Data binding https://developer.android.com/topic/libraries/data-binding
 * Kotlin coroutine https://kotlinlang.org/docs/coroutines-overview.html
-* Dagger injection: https://developer.android.com/training/dependency-injection/dagger-android
+* Dagger Hilt injection: https://developer.android.com/training/dependency-injection/hilt-android
 
 **Local Development**
 
 Use the gradlew build command or use "Import Project" in Android Studio.
 
 ./gradlew clean build - Build the entire example and execute unit and integration tests plus lint check.
+
 ./gradlew installDebug - Install the debug apk on the current connected device.
 
 
@@ -56,7 +62,7 @@ Use the gradlew build command or use "Import Project" in Android Studio.
 4. UI should be looks like in attachment. 
 
 5. Write Unit Tests 
-
+6. Ui test
 
 7. Exception handling 
 8. Caching handling (retrofit cache)
