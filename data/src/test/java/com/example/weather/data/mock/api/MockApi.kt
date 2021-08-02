@@ -30,9 +30,3 @@ fun fakeWeatherApiSearch(
     every { searchWeatherResponse.list} returns weatherListDto
     coEvery { searchWeather(any(), any(), any()) } returns WrapResponse.Success(searchWeatherResponse)
 }
-
-fun createHttpException(): HttpException {
-    val errorBody = "{\"cod\":\"404\",\"message\":\"city not found\"}".toResponseBody()
-    val response : Response<SearchWeatherResponse> = Response.error(404, errorBody)
-    return HttpException(response)
-}

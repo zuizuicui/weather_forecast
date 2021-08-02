@@ -47,4 +47,6 @@ dependencies {
 
     testImplementation unit_test
     testImplementation deps.unit_test.mockwebserver
+
+    androidTestImplementation android_test
 }

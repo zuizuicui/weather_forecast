@@ -3,6 +3,7 @@ package com.example.weather.di.module
 import com.example.weather.common.di.qualifier.DispatcherDefault
 import com.example.weather.common.di.qualifier.DispatcherIO
 import com.example.weather.data.di.ApiModule
+import com.example.weather.data.di.CacheModule
 import com.example.weather.data.di.ConverterModule
 import com.example.weather.data.di.RepositoryModule
 import com.example.weather.data.repository.dispatcher.DataDispatchers
@@ -13,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 
 @InstallIn(SingletonComponent::class)
-@Module( includes = [ConverterModule::class, RepositoryModule::class, ApiModule::class])
+@Module( includes = [ConverterModule::class, RepositoryModule::class, ApiModule::class, CacheModule::class])
 class DataModule {
     @Provides
     internal fun domainDispatcherProvider(

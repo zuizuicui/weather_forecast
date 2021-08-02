@@ -1,6 +1,5 @@
 package com.example.weather.data.di
 
-import android.content.Context
 import com.example.weather.data.remote.config.CacheControlInterceptor
 import com.example.weather.data.remote.config.RetrofitConfig
 import com.example.weather.data.remote.config.wrapresponse.WrapResponseAdapterFactory
@@ -8,9 +7,7 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Cache
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -39,13 +36,11 @@ class NetworkModule {
     @Provides
     internal fun provideOkHttpClient(
         certPinner: CertificatePinner,
-        cache: Cache,
         cacheControlInterceptor: CacheControlInterceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .certificatePinner(certPinner)
-            .cache(cache)
             .addInterceptor(cacheControlInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .build()
@@ -53,14 +48,6 @@ class NetworkModule {
 
     @Provides
     internal fun provideAdapterFactory() : CallAdapter.Factory = WrapResponseAdapterFactory()
-
-    @Provides
-    internal fun provideCache(@ApplicationContext context: Context) =
-        RetrofitConfig.cache(context)
-
-    @Provides
-    internal fun provideCacheControlInterceptor(@ApplicationContext context: Context) =
-        RetrofitConfig.cacheControlInterceptor(context)
 
     @Provides
     internal fun provideHttpLoggingInterceptor()  =

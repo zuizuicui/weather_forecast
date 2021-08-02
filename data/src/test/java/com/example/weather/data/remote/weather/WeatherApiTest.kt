@@ -1,5 +1,7 @@
 package com.example.weather.data.remote.weather
 
+import com.example.weather.data.memorycache.ResponseCache
+import com.example.weather.data.mock.cache.MockCache
 import com.example.weather.data.mock.webserver.build
 import com.example.weather.data.mock.webserver.enqueueResponse
 import com.example.weather.data.repository.dispatcher.DataDispatchers
@@ -7,6 +9,7 @@ import com.example.weather.data.repository.WeatherRepositoryImpl
 import com.example.weather.data.repository.converter.WeatherElementConvertImpl
 import com.example.weather.domain.entity.exception.CityNotFoundException
 import com.example.weather.domain.repository.WeatherRepository
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -22,9 +25,9 @@ class WeatherApiTest {
 
     private val mockWebServer = MockWebServer()
 
-    lateinit var api : WeatherApi
+    private lateinit var api : WeatherApi
 
-    lateinit var weatherRepository : WeatherRepository
+    private lateinit var weatherRepository : WeatherRepository
 
     @Before
     fun setup() {
@@ -32,7 +35,8 @@ class WeatherApiTest {
 
         val dispatchers = DataDispatchers(testDispatcher, testDispatcher)
         val converter = WeatherElementConvertImpl(dispatchers)
-        weatherRepository = WeatherRepositoryImpl(api, dispatchers, converter)
+        val cache: ResponseCache = MockCache.fakeCache(null)
+        weatherRepository = WeatherRepositoryImpl(api, dispatchers, converter, cache)
     }
 
     @After
