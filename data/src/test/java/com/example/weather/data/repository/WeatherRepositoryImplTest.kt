@@ -1,5 +1,6 @@
 package com.example.weather.data.repository
 
+import com.example.weather.data.local.WeatherDao
 import com.example.weather.data.remote.weather.WeatherApi
 import com.example.weather.data.mock.api.fakeWeatherApiSearch
 import com.example.weather.data.mock.converter.fakeConvertToWeatherElementDto
@@ -24,6 +25,7 @@ class WeatherRepositoryImplTest {
 
     private val dispatchers = DataDispatchers(testDispatcher, testDispatcher)
     private val weatherElementConvert = fakeConvertToWeatherElementDto(weatherListDto, weatherList)
+    private val weatherDao : WeatherDao = mockk()
 
     private lateinit var weatherRepository : WeatherRepositoryImpl
 
@@ -36,7 +38,8 @@ class WeatherRepositoryImplTest {
         weatherRepository = WeatherRepositoryImpl(
             weatherApiSuccess,
             dispatchers,
-            weatherElementConvert
+            weatherElementConvert,
+            weatherDao
         )
 
         testDispatcher.runBlockingTest {
@@ -55,7 +58,8 @@ class WeatherRepositoryImplTest {
         weatherRepository = WeatherRepositoryImpl(
             weatherApiFail,
             dispatchers,
-            weatherElementConvert
+            weatherElementConvert,
+            weatherDao
         )
 
         testDispatcher.runBlockingTest {

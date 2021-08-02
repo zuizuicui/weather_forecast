@@ -45,6 +45,13 @@ dependencies {
     implementation implementationHilt
     kapt kaptHilt
 
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+
     testImplementation unit_test
     testImplementation deps.unit_test.mockwebserver
+
+    androidTestImplementation(deps.room.test)
+    androidTestImplementation android_test
+
 }

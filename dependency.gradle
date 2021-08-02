@@ -28,7 +28,9 @@ ext.versions = [
         mapstruct: '1.5.0.Beta1',
         mockwebserver: '4.7.2',
 
-        hilt: '2.38.1'
+        hilt: '2.38.1',
+
+        room_version: '2.3.0'
 ]
 
 ext.deps = [
@@ -83,7 +85,12 @@ ext.deps = [
         'mapstruct'    : [
                 'runtime' : "org.mapstruct:mapstruct:${versions.mapstruct}",
                 'compiler': "org.mapstruct:mapstruct-processor:${versions.mapstruct}",
-        ]
+        ],
+        'room'    : [
+                'runtime' : "androidx.room:room-runtime:${versions.room_version}",
+                'compiler': "androidx.room:room-compiler:${versions.room_version}",
+                'test': "androidx.room:room-testing:${versions.room_version}"
+        ],
 ]
 
 ext.kaptDagger = [
